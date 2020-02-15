@@ -1,0 +1,12 @@
+{
+  "name": "escapebe",
+  "version": "1.0.0",
+  "description": "escape",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm server",
+    "server": "nodemon server"
+  },
+  "author": "Clayton Davidson",
+  "license": "ISC"
+}
