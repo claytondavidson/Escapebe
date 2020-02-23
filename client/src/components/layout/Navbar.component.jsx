@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../redux/actions/auth';
 
-export const Navbar = () => {
+export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+  const authLinks = (
+    <div className='buttons'>
+      <Link to='/'>
+        <button onClick={logout} className='button'>
+          Logout
+        </button>
+      </Link>
+    </div>
+  );
+
+  const guestLinks = (
+    <div className='buttons'>
+      <Link to='/register'>
+        <button className='button'>Register</button>
+      </Link>
+      <Link to='login'>
+        <button className='button'>Login</button>
+      </Link>
+    </div>
+  );
+
   return (
     <nav>
       <div className='content'>
@@ -16,14 +40,9 @@ export const Navbar = () => {
           <Link to='/'>About</Link>
           <Link to='/'>FAQ</Link>
         </div>
-        <div className='buttons'>
-          <Link to='/register'>
-            <button className='button'>Register</button>
-          </Link>
-          <Link to='login'>
-            <button className='button'>Login</button>
-          </Link>
-        </div>
+        {!loading && (
+          <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+        )}
         <i className='fas fa-bars menu'> </i>
         <Link to='/'>
           <i className='fas fa-user user'></i>
@@ -39,4 +58,13 @@ export const Navbar = () => {
   );
 };
 
-export default Navbar;
+Navbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);
