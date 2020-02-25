@@ -94,7 +94,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
         <div className='container signin'>
           <p>
-            Already have an account? <Link to='/login'>Sign In</Link>.
+            Already have an account? <Link to='/login'>Login</Link>.
           </p>
         </div>
       </form>

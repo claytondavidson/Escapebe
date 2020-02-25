@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const CommunitySchema = new Schema({
+const GroupSchema = new Schema({
   manager: {
     type: Schema.Types.ObjectId,
     ref: 'members'
@@ -28,7 +28,7 @@ const CommunitySchema = new Schema({
       }
     }
   ],
-  coverphoto: {
+  cover_photo: {
     type: string
   },
   posts: [
@@ -38,7 +38,11 @@ const CommunitySchema = new Schema({
         ref: 'posts'
       }
     }
-  ]
+  ],
+  date_created: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-module.exports = Community = mongoose.model('community', CommunitySchema);
+module.exports = Group = mongoose.model('group', GroupSchema);
