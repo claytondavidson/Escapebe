@@ -11,12 +11,17 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const authLinks = (
-    <div className='buttons'>
-      <Link to='/'>
-        <button onClick={logout} className='button'>
-          Logout
-        </button>
-      </Link>
+    <div className='authLinks'>
+      <li>
+        <Link to='/dashboard'>Dashboard</Link>
+      </li>
+      <div className='buttons'>
+        <Link to='/'>
+          <button onClick={logout} className='button'>
+            Logout
+          </button>
+        </Link>
+      </div>
     </div>
   );
 
@@ -67,6 +72,9 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             </li>
             <li>
               <Link to='/'>Groups</Link>
+            </li>
+            <li>
+              <Link to='/'>Members</Link>
             </li>
             <li>
               <Link to='/'>About</Link>

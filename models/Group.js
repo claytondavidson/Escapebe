@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const GroupSchema = new Schema({
+const GroupSchema = new mongoose.Schema({
   manager: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'members'
   },
   description: {
@@ -17,24 +17,24 @@ const GroupSchema = new Schema({
     type: String
   },
   picture: {
-    type: string,
+    type: String,
     required: true
   },
   subscribers: [
     {
       member: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'members'
       }
     }
   ],
   cover_photo: {
-    type: string
+    type: String
   },
   posts: [
     {
       posts: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'posts'
       }
     }

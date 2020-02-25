@@ -1,10 +1,12 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar/Navbar.component';
 import Landing from './components/layout/Landing/Landing.component';
 import Register from './components/auth/Register/Register.component';
 import Login from './components/auth/Login/Login.component';
 import Alert from './components/layout/Alert/Alert.component';
+import ProtectedRoute from './components/routing/ProtectedRoute.component';
+import Dashboard from './components/layout/Dashboard/Dashboard.component';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { loadMember } from './redux/actions/auth';
@@ -16,9 +18,18 @@ if (localStorage.token) {
 }
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    store.dispatch(loadMember());
+    (async () => {
+      await store.dispatch(loadMember());
+      setLoading(false);
+    })();
   }, []);
+
+  if (loading) {
+    return <Fragment></Fragment>;
+  }
 
   return (
     <Provider store={store}>
@@ -31,6 +42,7 @@ const App = () => {
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
+              <ProtectedRoute exact path='/dashboard' component={Dashboard} />
             </Switch>
           </section>
         </Fragment>
