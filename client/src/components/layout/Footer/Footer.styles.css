@@ -1,4 +1,4 @@
-.container {
+.links-container {
   text-align: center;
   padding: 0.8em 1.2em;
 }
@@ -7,7 +7,7 @@
   width: 100%;
   padding: 3em 0;
   border-top-right-radius: 40px;
-  color: #fff;
+  color: #d1d0d0;
   position: absolute;
   bottom: 0;
 }
@@ -22,6 +22,6 @@
 }
 
 .footer-links li a {
-  color: #9d9d9d;
+  color: #d1d0d0;
   font-size: 0.8em;
 }

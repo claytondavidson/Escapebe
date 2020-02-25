@@ -5,7 +5,7 @@ import './Footer.styles.css';
 export const Footer = () => {
   return (
     <div className='footer-container'>
-      <div className='container'>
+      <div className='links-container'>
         <p className='address'>
           St. Helena Island, 29920 <br />
           United States of America

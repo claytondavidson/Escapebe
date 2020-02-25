@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import triangle from './assets/triangle.svg';
 import './HeroSection.styles.css';
 
 export const HeroSection = () => {

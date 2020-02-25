@@ -11,7 +11,7 @@ a {
 
 .button {
   font-family: 'Montserrat', sans-serif;
-  background-color: #4caf50;
+  background-color: #008000;
   border: none;
   width: calc(100% - 1em);
   display: block;
@@ -28,7 +28,7 @@ a {
 
 .button:hover {
   background-color: green;
-  color: white;
+  color: #d1d0d0;
 }
 
 .triangle {

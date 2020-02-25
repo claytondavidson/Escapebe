@@ -1,10 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setAlert } from '../../redux/actions/alert';
+import { setAlert } from '../../../redux/actions/alert';
 import PropTypes from 'prop-types';
-import { register } from '../../redux/actions/auth';
-import './register.styles.css';
+import { register } from '../../../redux/actions/auth';
+import '../Register/register.styles.css';
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [memberData, setMemberData] = useState({

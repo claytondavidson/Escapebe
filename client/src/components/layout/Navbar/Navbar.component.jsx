@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { logout } from '../../redux/actions/auth';
+import { logout } from '../../../redux/actions/auth';
 import './Navbar.styles.css';
 import ham from './assets/ham.svg';
 import exit from './assets/exit.svg';

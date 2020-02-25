@@ -1,6 +1,6 @@
 import React from 'react';
-import HeroSection from './HeroSection.component';
-import Footer from './Footer.component';
+import HeroSection from '../HeroSection/HeroSection.component';
+import Footer from '../Footer/Footer.component';
 
 export const Landing = () => {
   return (
