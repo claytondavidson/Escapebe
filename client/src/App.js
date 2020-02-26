@@ -7,6 +7,7 @@ import Login from './components/auth/Login/Login.component';
 import Alert from './components/layout/Alert/Alert.component';
 import ProtectedRoute from './components/routing/ProtectedRoute.component';
 import Dashboard from './components/layout/Dashboard/Dashboard.component';
+import CreateDashboard from './components/layout/CreateDashboard/CreateDashboard.component';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { loadMember } from './redux/actions/auth';
@@ -43,6 +44,11 @@ const App = () => {
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <ProtectedRoute exact path='/dashboard' component={Dashboard} />
+              <ProtectedRoute
+                exact
+                path='/create-dashboard'
+                component={CreateDashboard}
+              />
             </Switch>
           </section>
         </Fragment>

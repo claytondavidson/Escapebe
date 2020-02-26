@@ -68,19 +68,19 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
               />
             </li>
             <li>
-              <Link to='/'>News</Link>
+              <Link to='/news'>News</Link>
             </li>
             <li>
-              <Link to='/'>Groups</Link>
+              <Link to='/groups'>Groups</Link>
             </li>
             <li>
-              <Link to='/'>Members</Link>
+              <Link to='/members'>Members</Link>
             </li>
             <li>
-              <Link to='/'>About</Link>
+              <Link to='/about'>About</Link>
             </li>
             <li>
-              <Link to='/'>FAQ</Link>
+              <Link to='/faq'>FAQ</Link>
             </li>
             {!loading && (
               <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>

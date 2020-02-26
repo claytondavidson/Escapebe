@@ -8,7 +8,7 @@ export const HeroSection = () => {
       <div className='container'>
         <h1>Say whatever you want.</h1>
         <p className='subtitle'>Speak freely without fear of being censored.</p>
-        <Link to='/'>
+        <Link to='/about'>
           <button className='button'>Learn More</button>
         </Link>
       </div>

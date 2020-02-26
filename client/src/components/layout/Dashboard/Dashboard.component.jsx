@@ -19,14 +19,20 @@ const Dashboard = ({
   ) : (
     <Fragment>
       <h1>Dashboard</h1>
-      <p>Welcome {member && member.username}</p>
+      <p>Welcome {member && member.username}!</p>
       {dashboard !== null ? (
         <Fragment>has</Fragment>
       ) : (
         <Fragment>
-          <p>You have not yet setup a dashboard, </p>
+          <p>You have not yet set up a dashboard</p>
           <Link to='/create-dashboard' className='button'>
             Create Dashboard
+          </Link>
+          <Link to='/groups' className='button'>
+            Find Groups
+          </Link>
+          <Link to='/' className='button'>
+            Return to Home
           </Link>
         </Fragment>
       )}

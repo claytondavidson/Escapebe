@@ -31,11 +31,11 @@ const GroupSchema = new mongoose.Schema({
   cover_photo: {
     type: String
   },
-  posts: [
+  threads: [
     {
-      posts: {
+      threads: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'posts'
+        ref: 'threads'
       }
     }
   ],
