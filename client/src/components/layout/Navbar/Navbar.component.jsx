@@ -15,6 +15,9 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <li>
         <Link to='/dashboard'>Dashboard</Link>
       </li>
+      <li>
+        <Link to='/groups'>Groups</Link>
+      </li>
       <div className='buttons'>
         <Link to='/'>
           <button onClick={logout} className='button'>
@@ -69,9 +72,6 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             </li>
             <li>
               <Link to='/news'>News</Link>
-            </li>
-            <li>
-              <Link to='/groups'>Groups</Link>
             </li>
             <li>
               <Link to='/members'>Members</Link>
