@@ -1,24 +1,20 @@
 const mongoose = require('mongoose');
 
 const GroupSchema = new mongoose.Schema({
-  manager: {
+  member: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'members'
-  },
-  description: {
-    type: String,
-    required: true
   },
   title: {
     type: String,
     required: true
   },
-  subtitle: {
-    type: String
-  },
-  picture: {
+  description: {
     type: String,
     required: true
+  },
+  picture: {
+    type: String
   },
   subscribers: [
     {
@@ -31,11 +27,61 @@ const GroupSchema = new mongoose.Schema({
   cover_photo: {
     type: String
   },
-  threads: [
+  posts: [
     {
-      threads: {
+      member: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'threads'
+        ref: 'members'
+      },
+      username: {
+        type: String
+      },
+      title: {
+        type: String,
+        required: true
+      },
+      text: {
+        type: String,
+        required: true
+      },
+      upvotes: [
+        {
+          member: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'members'
+          }
+        }
+      ],
+      comments: [
+        {
+          member: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'members'
+          },
+          username: {
+            type: String
+          },
+          text: {
+            type: String,
+            required: true
+          },
+          upvotes: [
+            {
+              member: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'members'
+              }
+            }
+          ],
+          date: {
+            type: Date,
+            default: Date.now
+          }
+        }
+      ],
+      date: {
+        type: Date,
+        default: Date.now
       }
     }
   ],
