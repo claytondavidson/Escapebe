@@ -15,9 +15,6 @@ router.post(
         .isEmpty(),
       check('description', 'you must write a group description')
         .not()
-        .isEmpty(),
-      check('picture', 'you must include a group picture')
-        .not()
         .isEmpty()
     ]
   ],
@@ -52,6 +49,44 @@ router.get('/', auth, async (req, res) => {
     res.json(groups);
   } catch (error) {
     console.error(error.message);
+    res.status(500).send('server error');
+  }
+});
+
+router.get('/:id', auth, async (req, res) => {
+  try {
+    const group = await Group.findById(req.params.id);
+
+    if (!group) {
+      return res.status(404).json({ msg: 'group does not exist' });
+    }
+
+    res.json(group);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'group not found' });
+    }
+    res.status(500).send('server error');
+  }
+});
+
+router.get('/:group_id/:post_id', auth, async (req, res) => {
+  try {
+    const group = await Group.findById(req.params.group_id);
+
+    const post = group.posts.find(post => post.id === req.params.post_id);
+
+    if (!post) {
+      return res.status(404).json({ msg: 'post does not exist' });
+    }
+
+    res.json(post);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'post not found' });
+    }
     res.status(500).send('server error');
   }
 });

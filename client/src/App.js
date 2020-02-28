@@ -8,6 +8,8 @@ import Alert from './components/layout/Alert/Alert.component';
 import ProtectedRoute from './components/routing/ProtectedRoute.component';
 import Dashboard from './components/layout/Dashboard/Dashboard.component';
 import Groups from './components/layout/Groups/Groups.component';
+import Group from './components/layout/Group/Group.component';
+import Post from './components/layout/Post/Post.component';
 import CreateDashboard from './components/layout/CreateDashboard/CreateDashboard.component';
 import { Provider } from 'react-redux';
 import store from './redux/store';
@@ -51,6 +53,12 @@ const App = () => {
                 component={CreateDashboard}
               />
               <ProtectedRoute exact path='/groups' component={Groups} />
+              <ProtectedRoute exact path='/group/:id' component={Group} />
+              <ProtectedRoute
+                exact
+                path='/group/:group_id/:post_id'
+                component={Post}
+              />
             </Switch>
           </section>
         </Fragment>
