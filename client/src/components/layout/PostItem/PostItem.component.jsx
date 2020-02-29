@@ -6,8 +6,7 @@ import Moment from 'react-moment';
 
 const PostItem = ({
   groupId,
-  post: { _id, username, member, title, text, upvotes, comments, date },
-  auth
+  post: { _id, username, member, title, text, upvotes, comments, date }
 }) => (
   <Fragment>
     <div className='group'>
@@ -21,18 +20,22 @@ const PostItem = ({
       <p>
         Posted on <Moment format='MM/DD/YYYY'>{date}</Moment>
       </p>
+      <Link to={`/group/${groupId}/${_id}`} className='button'>
+        {comments.length === 1
+          ? `${comments.length} comment`
+          : `${comments.length} comments`}
+      </Link>
     </div>
   </Fragment>
 );
 
 PostItem.propTypes = {
   groupId: PropTypes.string.isRequired,
-  post: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  group: state.group
 });
 
 export default connect(mapStateToProps, {})(PostItem);

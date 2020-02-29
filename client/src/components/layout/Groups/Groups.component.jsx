@@ -5,6 +5,7 @@ import Spinner from '../Spinner/Spinner.component';
 import GroupItem from '../GroupItem/GroupItem.component';
 import { getGroups } from '../../../redux/actions/group';
 import GroupForm from '../GroupForm/GroupForm.component';
+import LazyLoad from 'react-lazyload';
 
 const Groups = ({ getGroups, group: { groups, loading } }) => {
   useEffect(() => {
@@ -18,7 +19,9 @@ const Groups = ({ getGroups, group: { groups, loading } }) => {
       <h1>Groups</h1>
       <div className='groups'>
         {groups.map(group => (
-          <GroupItem key={group._id} group={group} />
+          <LazyLoad key={group._id}>
+            <GroupItem key={group._id} group={group} />
+          </LazyLoad>
         ))}
       </div>
       <GroupForm />

@@ -15,7 +15,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { loadMember } from './redux/actions/auth';
 import setToken from './utilities/setToken';
-import './App.css';
+import './scss/app.styles.scss';
 
 if (localStorage.token) {
   setToken(localStorage.token);

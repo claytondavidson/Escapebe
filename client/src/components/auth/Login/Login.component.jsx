@@ -3,8 +3,6 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../../redux/actions/auth';
-//import axios from 'axios';
-import '../Register/register.styles.css';
 
 const Login = ({ login, isAuthenticated }) => {
   const [memberData, setMemberData] = useState({
