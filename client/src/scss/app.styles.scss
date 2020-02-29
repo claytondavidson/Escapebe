@@ -27,13 +27,16 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.7rem 2rem;
+  padding: 1.7rem 2rem;
   position: fixed;
   z-index: 1;
   width: 100%;
   top: 0;
-  border-bottom: solid 1px $primary-color;
-  opacity: 0.9;
+  background-color: $dark-background;
+
+  .logo {
+    color: #4caf50;
+  }
 
   .hide-mobile {
     display: none;
@@ -42,11 +45,12 @@ ul {
   .menu {
     width: 20px;
     margin-top: 50%;
+    z-index: -1;
   }
 
   ul {
     position: fixed;
-    width: 60%;
+    width: 50%;
     top: 0;
     right: 0;
     text-align: left;
@@ -73,10 +77,10 @@ ul {
 }
 
 .exit-btn {
-  margin-bottom: 1em;
-  margin-top: -0.5em;
+  margin-bottom: 0.5em;
+  margin-top: -1.7em;
   text-align: right;
-  padding: 0 1.4em;
+  padding: 0 2.1em;
 
   img {
     width: 15px;
@@ -97,25 +101,24 @@ ul {
     flex-direction: column;
     width: 90%;
     margin: auto;
-    padding: 0.8em 0.5em;
+    padding: 16em 0.5em;
     align-items: center;
     justify-content: center;
     text-align: center;
   }
 
-  .buttons {
+  .button {
     font-family: 'Montserrat', sans-serif;
-    background-color: #008000;
+    background-color: $success-color;
     border: none;
-    width: calc(100% - 0.8em);
+    width: calc(20% + 12em);
     display: block;
     color: #d1d0d0;
     border-radius: 20px;
     padding: 0.5em;
     font-size: 1em;
-    margin: 3% auto 7%;
+    margin: 0.5rem;
     position: relative;
-    z-index: 4;
     cursor: pointer;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2),
       0 3px 15px 0 rgba(0, 0, 0, 0.19);

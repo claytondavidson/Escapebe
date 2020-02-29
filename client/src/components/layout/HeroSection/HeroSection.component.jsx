@@ -7,11 +7,12 @@ export const HeroSection = () => {
       <div className='hero-inner'>
         <h1 className='x-large'>Say what you want</h1>
         <p className='subtitle'>Speak freely without fear of being censored</p>
-        <div className='buttons'>
-          <Link to='/about' className='button button-primary'>
-            Learn More
-          </Link>
-        </div>
+        <Link to='/register' className='button button-primary'>
+          Register
+        </Link>
+        <Link to='/login' className='button button-primary'>
+          Login
+        </Link>
       </div>
     </section>
   );
