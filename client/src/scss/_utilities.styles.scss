@@ -10,24 +10,3 @@
   line-height: 1.5;
   margin-bottom: 1rem;
 }
-
-// Backgrounds
-
-.background {
-  &-primary {
-    @include set-background($primary-color);
-  }
-  &-light {
-    @include set-background($light-color);
-    border: #ccc 1px solid;
-  }
-  &-dark {
-    @include set-background($dark-color);
-  }
-  &-danger {
-    @include set-background($danger-color);
-  }
-  &-success {
-    @include set-background($success-color);
-  }
-}

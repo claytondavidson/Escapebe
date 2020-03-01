@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/layout/Navbar/Navbar.component';
+import Navigationbar from './components/layout/Navbar/Navigationbar.component';
 import Landing from './components/layout/Landing/Landing.component';
 import Register from './components/auth/Register/Register.component';
 import Login from './components/auth/Login/Login.component';
@@ -39,28 +39,26 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-          <Navbar />
+          <Navigationbar />
           <Route exact path='/' component={Landing} />
-          <section className='container'>
-            <Alert />
-            <Switch>
-              <Route exact path='/register' component={Register} />
-              <Route exact path='/login' component={Login} />
-              <ProtectedRoute exact path='/dashboard' component={Dashboard} />
-              <ProtectedRoute
-                exact
-                path='/create-dashboard'
-                component={CreateDashboard}
-              />
-              <ProtectedRoute exact path='/groups' component={Groups} />
-              <ProtectedRoute exact path='/group/:id' component={Group} />
-              <ProtectedRoute
-                exact
-                path='/group/:group_id/:post_id'
-                component={Post}
-              />
-            </Switch>
-          </section>
+          <Alert />
+          <Switch>
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
+            <ProtectedRoute exact path='/dashboard' component={Dashboard} />
+            <ProtectedRoute
+              exact
+              path='/create-dashboard'
+              component={CreateDashboard}
+            />
+            <ProtectedRoute exact path='/groups' component={Groups} />
+            <ProtectedRoute exact path='/group/:id' component={Group} />
+            <ProtectedRoute
+              exact
+              path='/group/:group_id/:post_id'
+              component={Post}
+            />
+          </Switch>
         </Fragment>
       </Router>
     </Provider>
