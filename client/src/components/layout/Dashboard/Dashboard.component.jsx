@@ -27,15 +27,15 @@ const Dashboard = ({
         <Fragment>
           <p>You have not yet set up a dashboard</p>
           <Nav>
-          <Nav.Link to='/create-dashboard' className='button'>
-            Create Dashboard
-          </Nav.Link>
-          <Nav.Link to='/groups' className='button'>
-            Find Groups
-          </Nav.Link>
-          <Nav.Link to='/' className='button'>
-            Return to Home
-          </Nav.Link>
+            <Nav.Link as={Link} to='/create-dashboard' className='button'>
+              Create Dashboard
+            </Nav.Link>
+            <Nav.Link as={Link} to='/groups' className='button'>
+              Find Groups
+            </Nav.Link>
+            <Nav.Link as={Link} to='/' className='button'>
+              Return to Home
+            </Nav.Link>
           </Nav>
         </Fragment>
       )}
