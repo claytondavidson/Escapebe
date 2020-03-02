@@ -38,7 +38,6 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        
         <Fragment>
           <Navigationbar />
           <Route exact path='/' component={Landing} />

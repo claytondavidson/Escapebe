@@ -1,22 +1,25 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React, { Fragment, useState } from 'react';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Login from '../../auth/Login/Login.component';
+import Register from '../../auth/Register/Register.component';
+
 export const HeroSection = () => {
+
   return (
-    <div>
-    <div className='container' id="heroSectionContainer">
-      
-      <div className="row align-items-center mt-5">
-      <h1 className="col-12">Say what you want</h1>
-      <p className='col-12 subtitle'>Speak freely without fear of being censored</p>
-      <Button id="learnMoreButton" className="ml-5" as={Link} to='/about'>
-        Learn More
-      </Button>
-      </div>
-      <Login/>
-    </div>
-    </div>
+    <Fragment>
+      <Container id='heroSectionContainer'>
+        <Row className='mt-5 mr-auto'>
+          <Col>
+            <h1>Say what you want</h1>
+            <p>Speak freely without fear of being censored</p>
+            <Button id='learnMoreButton' as={Link} to='/about'>
+              Learn More
+            </Button>
+          </Col>
+        </Row>
+      </Container>
+    </Fragment>
   );
 };
 

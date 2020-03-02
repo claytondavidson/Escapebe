@@ -3,8 +3,9 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../../redux/actions/auth';
-import { Form, } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Button, Col, Row, Container, Card } from 'react-bootstrap';
+
 const Login = ({ login, isAuthenticated }) => {
   const [memberData, setMemberData] = useState({
     email: '',
@@ -22,53 +23,55 @@ const Login = ({ login, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to='/dashboard' />;
   }
 
   return (
     <Fragment>
-      <br></br>
-      <div className="container" style={{color: "black"}}>
-      <Card style={{ width: '20rem' }} className="ml-md-auto">
-      <div className="container">
-        <div className="row">
-          <div className="mx-auto">
-      <Form onSubmit={e => onSubmit(e)}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter Email"
-            name="email"
-            required
-            value={email}
-            onChange={e => onChange(e)}
-          />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter Password"
-            name="password"
-            value={password}
-            onChange={e => onChange(e)}
-            required
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit" id="loginSubmitButton">
-          Submit
-        </Button>
-      </Form>
-      </div>
-      </div>
-      </div>
-      </Card>
-      </div>
+      <Container style={{ color: 'black' }}>
+        <Card style={{ width: '20rem' }} className='ml-md-auto'>
+          <Container>
+            <Row>
+              <div className='mx-auto'>
+                <Form onSubmit={e => onSubmit(e)}>
+                  <Form.Group controlId='formBasicEmail'>
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Enter Email'
+                      name='email'
+                      required
+                      value={email}
+                      onChange={e => onChange(e)}
+                    />
+                    <Form.Text className='text-muted'>
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+                  <Form.Group controlId='formBasicPassword'>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type='password'
+                      placeholder='Enter Password'
+                      name='password'
+                      value={password}
+                      onChange={e => onChange(e)}
+                      required
+                    />
+                  </Form.Group>
+                  <Button
+                    variant='primary'
+                    type='submit'
+                    id='loginSubmitButton'
+                  >
+                    Submit
+                  </Button>
+                </Form>
+              </div>
+            </Row>
+          </Container>
+        </Card>
+      </Container>
     </Fragment>
   );
 };
