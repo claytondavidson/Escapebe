@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentDashboard } from '../../../redux/actions/dashboard';
 import Spinner from '../Spinner/Spinner.component';
+import { Nav, Navbar } from 'react-bootstrap';
 
 const Dashboard = ({
   getCurrentDashboard,
@@ -25,15 +26,17 @@ const Dashboard = ({
       ) : (
         <Fragment>
           <p>You have not yet set up a dashboard</p>
-          <Link to='/create-dashboard' className='button'>
+          <Nav>
+          <Nav.Link to='/create-dashboard' className='button'>
             Create Dashboard
-          </Link>
-          <Link to='/groups' className='button'>
+          </Nav.Link>
+          <Nav.Link to='/groups' className='button'>
             Find Groups
-          </Link>
-          <Link to='/' className='button'>
+          </Nav.Link>
+          <Nav.Link to='/' className='button'>
             Return to Home
-          </Link>
+          </Nav.Link>
+          </Nav>
         </Fragment>
       )}
     </Fragment>

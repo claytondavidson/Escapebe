@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { logout } from '../../../redux/actions/auth';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Button, Col, Row, Container } from 'react-bootstrap';
 
 export const Navigationbar = ({
   auth: { isAuthenticated, loading },
@@ -11,53 +12,61 @@ export const Navigationbar = ({
 }) => {
   const authLinks = (
     <div>
-      <Nav className='ml-auto'>
-        <Nav.Item as={Link} to='/dashboard'>
+      <Nav className="ml-auto">
+        <Nav.Link as={Link} to="/dashboard">
           Dashboard
-        </Nav.Item>
-        <Nav.Item as={Link} to='/groups'>
+        </Nav.Link>
+        <Nav.Link as={Link} to="/groups">
           Groups
-        </Nav.Item>
-        <Nav.Item onClick={logout} as={Link} to='/'>
+        </Nav.Link>
+        <Nav.Link onClick={logout} as={Link} to="/">
           Logout
-        </Nav.Item>
+        </Nav.Link>
       </Nav>
     </div>
   );
 
   const guestLinks = (
     <div>
-      <Nav className='ml-auto'>
-        <Nav.Item as={Link} to='/register'>
-          Register
-        </Nav.Item>
-        <Nav.Item as={Link} to='/login'>
-          Login
-        </Nav.Item>
-      </Nav>
+        <div className="mx-md-auto">
+        <Row>
+        <Nav className="ml-0">
+          <Col>
+          <Button className="btn-success" as={Link} to="/register" id="registerButton">
+            Register
+          </Button>
+          </Col>
+          <Col>
+          <Button className="btn-success"  as={Link} to="/login" id="loginButton">
+            Login
+          </Button>
+          </Col>
+        </Nav>
+        </Row>
+        </div>
     </div>
   );
 
   return (
-    <Navbar bg='dark' variant='dark' expand='lg'>
-      <Navbar.Brand as={Link} to='/'>
-        <i className='fas fa-microphone'></i> Escapebe
+    <Navbar expand="md">
+      <Navbar.Brand as={Link} to="/">
+        <i className="fas fa-microphone"></i> Escapebe
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
-      <Navbar.Collapse id='basic-navbar-nav'>
-        <Nav className='ml-auto'>
-          <Nav.Item as={Link} to='/news'>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          <Nav.Link as={Link} to="/news">
             News
-          </Nav.Item>
-          <Nav.Item as={Link} to='/members'>
+          </Nav.Link>
+          <Nav.Link as={Link} to="/members">
             Members
-          </Nav.Item>
-          <Nav.Item as={Link} to='/about'>
+          </Nav.Link>
+          <Nav.Link as={Link} to="/about">
             About
-          </Nav.Item>
-          <Nav.Item as={Link} to='/faq'>
+          </Nav.Link>
+          <Nav.Link as={Link} to="/faq">
             FAQ
-          </Nav.Item>
+          </Nav.Link>
           {!loading && (
             <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
           )}
