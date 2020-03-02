@@ -4,11 +4,39 @@
 }
 
 #loginButton {
-  width: 120%;
+  width: 130px;
   border-radius: 25px;
 }
 
 #registerButton {
-  width: 120%;
+  width: 130px;
   border-radius: 25px;
+}
+#loginSubmitButton {
+  width: 365px
+}
+head {
+  background-color: grey;
+}
+#navBarnavBar {
+  color:white
+}
+#loginNavbar {
+
+}
+#learnMoreButton {
+  border-radius: 25px;
+}
+#heroSectionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+#groupForm {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+
+
+}  
 }

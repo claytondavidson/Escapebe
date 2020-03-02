@@ -20,6 +20,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "rfs": "^9.0.2",
     "uuid": "^3.4.0",
     "webpack": "^4.41.6"
   },

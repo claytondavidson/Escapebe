@@ -15,7 +15,7 @@ import store from './redux/store';
 import { loadMember } from './redux/actions/auth';
 import setToken from './utilities/setToken';
 import './scss/app.styles.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 if (localStorage.token) {
   setToken(localStorage.token);
@@ -38,6 +38,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
+        
         <Fragment>
           <Navigationbar />
           <Route exact path='/' component={Landing} />

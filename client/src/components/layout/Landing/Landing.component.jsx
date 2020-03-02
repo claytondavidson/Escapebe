@@ -1,6 +1,5 @@
 import React from 'react';
 import HeroSection from '../HeroSection/HeroSection.component';
-
 export const Landing = () => {
   return (
     <div>

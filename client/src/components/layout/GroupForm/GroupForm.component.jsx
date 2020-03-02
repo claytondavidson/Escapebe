@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createGroup } from '../../../redux/actions/group';
-
+import { Button, Col, Row, Container, Card } from 'react-bootstrap';
 const GroupForm = ({ createGroup }) => {
   const [groupData, setGroupData] = useState({
     title: '',
@@ -15,7 +15,8 @@ const GroupForm = ({ createGroup }) => {
     setGroupData({ ...groupData, [e.target.name]: e.target.value });
 
   return (
-    <div>
+    <div className="" style={{ position: "fixed", top:100, right:50  }}>
+      <div className="">
       <h3>Create a group</h3>
       <form
         className='groupform'
@@ -28,6 +29,7 @@ const GroupForm = ({ createGroup }) => {
           setGroupData({
             title: '',
             description: ''
+          
           });
         }}
       >
@@ -48,10 +50,11 @@ const GroupForm = ({ createGroup }) => {
           required
         ></textarea>
 
-        <button type='submit' className='registerbtn'>
+        <Button type='submit' className='btn-success'>
           Create Group
-        </button>
+        </Button>
       </form>
+    </div>
     </div>
   );
 };

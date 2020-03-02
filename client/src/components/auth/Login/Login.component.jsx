@@ -3,7 +3,8 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../../redux/actions/auth';
-
+import { Form, } from 'react-bootstrap';
+import { Button, Col, Row, Container, Card } from 'react-bootstrap';
 const Login = ({ login, isAuthenticated }) => {
   const [memberData, setMemberData] = useState({
     email: '',
@@ -21,48 +22,53 @@ const Login = ({ login, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (
     <Fragment>
-      <form className='form' onSubmit={e => onSubmit(e)}>
-        <div className='container'>
-          <h1>Log In</h1>
-          <p>Please fill in this form to log in.</p>
-
-          <b>Email</b>
-          <input
-            type='text'
-            placeholder='Enter Email'
-            name='email'
+      <br></br>
+      <div className="container" style={{color: "black"}}>
+      <Card style={{ width: '20rem' }} className="ml-md-auto">
+      <div className="container">
+        <div className="row">
+          <div className="mx-auto">
+      <Form onSubmit={e => onSubmit(e)}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Email"
+            name="email"
             required
             value={email}
             onChange={e => onChange(e)}
           />
-          <br />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
 
-          <b>Password</b>
-          <input
-            type='password'
-            placeholder='Enter Password'
-            name='password'
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter Password"
+            name="password"
             value={password}
             onChange={e => onChange(e)}
             required
           />
-          <br />
-          <button type='submit' className='registerbtn'>
-            Login
-          </button>
-        </div>
-
-        <div className='container signin'>
-          <p>
-            Don't have an account? <Link to='/register'>Register</Link>.
-          </p>
-        </div>
-      </form>
+        </Form.Group>
+        <Button variant="primary" type="submit" id="loginSubmitButton">
+          Submit
+        </Button>
+      </Form>
+      </div>
+      </div>
+      </div>
+      </Card>
+      </div>
     </Fragment>
   );
 };
