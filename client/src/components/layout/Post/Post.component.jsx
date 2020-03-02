@@ -49,8 +49,6 @@ const Post = ({ getPost, post, match }) => {
   );
 };
 
-//<CommentItem key={comment._id}></CommentItem>
-
 Post.propTypes = {
   getPost: PropTypes.func.isRequired
 };

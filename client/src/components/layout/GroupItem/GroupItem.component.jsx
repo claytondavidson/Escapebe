@@ -5,8 +5,7 @@ import Moment from 'react-moment';
 import { connect } from 'react-redux';
 
 const GroupItem = ({
-  auth,
-  group: { _id, title, description, picture, subscribers, date_created, posts },
+  group: { _id, title, description, date_created },
   showButton
 }) => (
   <div className='GroupItem'>
