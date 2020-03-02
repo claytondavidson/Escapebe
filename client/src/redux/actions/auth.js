@@ -9,7 +9,6 @@ import {
   LOGOUT,
   CLEAR_USER
 } from './types';
-import { setAlert } from './alert';
 import setToken from '../../utilities/setToken';
 
 export const loadMember = () => async dispatch => {
@@ -53,11 +52,6 @@ export const register = ({ username, email, password }) => async dispatch => {
     dispatch(loadMember());
   } catch (error) {
     console.error(error);
-    const errors = error.response.data.errors;
-
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg)));
-    }
 
     dispatch({ type: REGISTER_FAIL });
   }
@@ -82,14 +76,6 @@ export const login = ({ email, password }) => async dispatch => {
     dispatch(loadMember());
   } catch (error) {
     console.error(error);
-    /*
-    const errors = error.response.data.errors;
-
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg)));
-    } 
-    */
-
     dispatch({ type: LOGIN_FAIL });
   }
 };

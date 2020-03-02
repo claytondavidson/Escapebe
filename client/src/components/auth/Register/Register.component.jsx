@@ -1,11 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setAlert } from '../../../redux/actions/alert';
 import PropTypes from 'prop-types';
 import { register } from '../../../redux/actions/auth';
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ register, isAuthenticated }) => {
   const [memberData, setMemberData] = useState({
     username: '',
     email: '',
@@ -21,7 +20,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== repeat) {
-      setAlert('passwords do not match', 'danger');
+      console.log('passwords do not match');
     } else {
       register({ username, email, password });
     }
@@ -102,7 +101,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool
 };
@@ -111,4 +109,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default connect(mapStateToProps, { register })(Register);

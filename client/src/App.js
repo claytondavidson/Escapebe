@@ -4,7 +4,6 @@ import Navigationbar from './components/layout/Navbar/Navigationbar.component';
 import Landing from './components/layout/Landing/Landing.component';
 import Register from './components/auth/Register/Register.component';
 import Login from './components/auth/Login/Login.component';
-import Alert from './components/layout/Alert/Alert.component';
 import ProtectedRoute from './components/routing/ProtectedRoute.component';
 import Dashboard from './components/layout/Dashboard/Dashboard.component';
 import Groups from './components/layout/Groups/Groups.component';
@@ -41,7 +40,6 @@ const App = () => {
         <Fragment>
           <Navigationbar />
           <Route exact path='/' component={Landing} />
-          <Alert />
           <Switch>
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
