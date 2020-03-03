@@ -5,7 +5,8 @@ import {
   GET_GROUP,
   ADD_POST,
   GET_POST,
-  ADD_COMMENT
+  ADD_COMMENT,
+  UPVOTE_POST
 } from '../actions/types';
 
 const initialState = {
@@ -60,7 +61,15 @@ export default function(state = initialState, action) {
     case ADD_COMMENT:
       return {
         ...state,
-        group: { ...state.group, ...state.post, comments: payload },
+        post: { ...state.post, comments: payload },
+        loading: false
+      };
+    case UPVOTE_POST:
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post._id === payload.id ? { ...post, upvotes: payload.upvotes } : post
+        ),
         loading: false
       };
     default:

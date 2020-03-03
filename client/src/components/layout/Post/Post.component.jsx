@@ -2,10 +2,12 @@ import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
 import Spinner from '../Spinner/Spinner.component';
 import { getPost } from '../../../redux/actions/group';
 import LazyLoad from 'react-lazyload';
+import CommentForm from '../../layout/CommentForm/CommentForm.component';
+import CommentItem from '../../layout/CommentItem/CommentItem.component';
+import PostItem from '../PostItem/PostItem.component';
 
 const Post = ({ getPost, post, match }) => {
   const [postLoading, setPostLoading] = useState(true);
@@ -21,30 +23,27 @@ const Post = ({ getPost, post, match }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <div className='post-component'>
-        <div>{post.username}</div>
-        <div>{post.title}</div>
-        <div>{post.text}</div>
-        {post.comments &&
-          post.comments.map(comment => (
-            <LazyLoad key={comment._id}>
-              <div className='comment' key={comment._id}>
-                <div>
-                  <Link to={`/dashboard/${comment.member}`}>
-                    <h4>{comment.username}</h4>
-                  </Link>
-                </div>
-                <p>{comment.text}</p>
-                <p>
-                  Posted on <Moment format='MM/DD/YYYY'>{comment.date}</Moment>
-                </p>
-              </div>
-            </LazyLoad>
-          ))}
-        <Link className='button' to={`/group/${match.params.group_id}`}>
-          Close
-        </Link>
-      </div>
+      <PostItem
+        key={match.params.group_id}
+        groupId={match.params.group_id}
+        post={post}
+        showComments={false}
+      />
+      {post.comments &&
+        post.comments.map(comment => (
+          <LazyLoad key={comment._id}>
+            <CommentItem
+              key={comment._id}
+              comment={comment}
+              groupId={match.params.group_id}
+              postId={post._id}
+            />
+          </LazyLoad>
+        ))}
+      <CommentForm groupId={match.params.group_id} postId={post._id} />
+      <Link className='button' to={`/group/${match.params.group_id}`}>
+        Close
+      </Link>
     </Fragment>
   );
 };

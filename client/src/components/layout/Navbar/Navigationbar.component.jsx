@@ -35,12 +35,7 @@ export const Navigationbar = ({
         </Nav.Link>
         
         <Nav.Link onClick={logout} as={Link} to='/'>
-          <Button
-            className='btn-success ml-xl-5'
-            as={Link}
-            to='/'
-            id='logoutButton'
-          >
+          <Button className='btn-success ml-lg-3' id='logoutButton'>
             <i className='fas fa-sign-out-alt'></i>
             Logout
           </Button>
@@ -70,11 +65,21 @@ export const Navigationbar = ({
       <div className='float-right ml-xl-5'>
         <div className='ml-xl-5'>
           <Nav id='loginNavbar' className='mx-lg-5'>
-            <Button as={Link} to="/register" className='btn-success ml-md-3 mr-lg-3' id='registerButton'>
+            <Button
+              as={Link}
+              to='/register'
+              className='btn-success ml-md-3 mr-lg-3'
+              id='registerButton'
+            >
               <i className='fas fa-user-plus'></i>
               Register
             </Button>
-            <Button as={Link} to="/login" className='btn-success mr-lg-5' id='loginButton'>
+            <Button
+              as={Link}
+              to='/login'
+              className='btn-success mr-5'
+              id='loginButton'
+            >
               <i className='fas fa-sign-in-alt'></i>
               Login
             </Button>
