@@ -8,7 +8,8 @@ import {
   ADD_POST,
   POST_ERROR,
   GET_POST,
-  ADD_COMMENT
+  ADD_COMMENT,
+  UPVOTE_POST
 } from './types';
 
 export const getGroups = () => async dispatch => {
@@ -121,6 +122,22 @@ export const addComment = (groupId, postId, formData) => async dispatch => {
     dispatch({
       type: ADD_COMMENT,
       payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
+  }
+};
+
+export const upvotePost = (groupId, postId) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/groups/upvote/${groupId}/${postId}`);
+
+    dispatch({
+      type: UPVOTE_POST,
+      payload: { groupId, postId, upvotes: res.data }
     });
   } catch (error) {
     dispatch({

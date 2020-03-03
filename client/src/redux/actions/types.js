@@ -17,3 +17,4 @@ export const ADD_POST = 'ADD_POST';
 export const POST_ERROR = 'POST_ERROR';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const CREATE_GROUP = 'CREATE_GROUP';
+export const UPVOTE_POST = 'UPVOTE_POST';
