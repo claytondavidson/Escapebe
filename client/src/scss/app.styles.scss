@@ -1,20 +1,23 @@
 * {
-  font-size: 1.15rem;
+  font-size: 1.0rem;
   font-family: 'Montserrat', sans-serif;
 }
 
 #loginButton {
-  width: 130px;
+  width: 150px;
   border-radius: 25px;
 }
-
+#logoutButton {
+  width: 120px;
+  border-radius: 25px;
+}
 #registerButton {
   width: 150px;
   border-radius: 25px;
 }
 
 #loginSubmitButton {
-  width: 365px;
+  width: 16.3rem;
 }
 
 head {
@@ -43,4 +46,7 @@ head {
     bottom: 0;
     right: 0;
   }
+}
+#groupSearchBar {
+  width: 10em
 }

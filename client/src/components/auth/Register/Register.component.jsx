@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { register } from '../../../redux/actions/auth';
 import { Form } from 'react-bootstrap';
 import { Button, Col, Row, Container, Card } from 'react-bootstrap';
-
+import HeroSection from '../../layout/HeroSection/HeroSection.component';
 const Register = ({ register, isAuthenticated }) => {
   const [memberData, setMemberData] = useState({
     username: '',
@@ -34,11 +34,17 @@ const Register = ({ register, isAuthenticated }) => {
 
   return (
     <Fragment>
+            <Container className="mx-md-auto">
+    <div className="row">
+      <div className="col-xs-12 col-md-6">
+      <HeroSection />
+      </div>
+            <div className="col-xs-12 col-md-6 mt-5"> 
       <Container style={{ color: 'black' }}>
-        <Card style={{ width: '20rem' }} className='ml-md-auto'>
+        <Card style={{ width: '16.5rem' }} className='mx-md-auto'>
           <Container>
             <Row>
-              <div className='mx-auto'>
+              <div className=''>
                 <h1>Register</h1>
                 <p>Please fill in this form to create an account.</p>
                 <Form onSubmit={e => onSubmit(e)}>
@@ -97,7 +103,7 @@ const Register = ({ register, isAuthenticated }) => {
                     <Link to='/'>Terms & Privacy</Link>
                   </p>
 
-                  <div className='container signin'>
+                  <div className='container signin text-center'>
                     <p>
                       Already have an account? <Link to='/login'>Login</Link>.
                     </p>
@@ -108,6 +114,9 @@ const Register = ({ register, isAuthenticated }) => {
           </Container>
         </Card>
       </Container>
+      </div>
+    </div>
+    </Container>
     </Fragment>
   );
 };

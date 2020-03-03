@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { login } from '../../../redux/actions/auth';
 import { Form } from 'react-bootstrap';
 import { Button, Col, Row, Container, Card } from 'react-bootstrap';
-
+import HeroSection from '../../layout/HeroSection/HeroSection.component';
 const Login = ({ login, isAuthenticated }) => {
   const [memberData, setMemberData] = useState({
     email: '',
@@ -23,13 +23,18 @@ const Login = ({ login, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (
     <Fragment>
-      <Container style={{ color: 'black' }}>
-        <Card style={{ width: '20rem' }} className='ml-md-auto'>
+                  <Container className="mx-auto">
+    <div className="row">
+      <div className="col-xs-12 col-md-6">
+      <HeroSection />
+      </div>
+      <Container className="col-xs-12 col-md-6 mt-5" style={{ color: 'black' }}>
+        <Card style={{ width: '16.5em' }} className='mx-md-auto'>
           <Container>
             <Row>
               <div className='mx-auto'>
@@ -63,6 +68,7 @@ const Login = ({ login, isAuthenticated }) => {
                     variant='primary'
                     type='submit'
                     id='loginSubmitButton'
+                    className=""
                   >
                     Submit
                   </Button>
@@ -72,6 +78,8 @@ const Login = ({ login, isAuthenticated }) => {
           </Container>
         </Card>
       </Container>
+      </div>
+    </Container>
     </Fragment>
   );
 };

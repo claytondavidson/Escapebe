@@ -13,45 +13,55 @@ import {
   FormControl
 } from 'react-bootstrap';
 import Login from '../../auth/Login/Login.component';
-
+var ReactFitText = require('react-fittext');
 export const Navigationbar = ({
   auth: { isAuthenticated, loading },
   logout
 }) => {
   const authLinks = (
     <div>
+      
       <Nav>
+      
         <Nav.Link as={Link} to='/dashboard'>
           <i className='fas fa-tv'></i>
           Dashboard
         </Nav.Link>
+        
+        
         <Nav.Link as={Link} to='/groups'>
           <i className='fas fa-users'></i>
           Groups
         </Nav.Link>
+        
         <Nav.Link onClick={logout} as={Link} to='/'>
           <Button
-            className='btn-success ml-lg-3'
+            className='btn-success ml-xl-5'
             as={Link}
             to='/'
-            id='loginButton'
+            id='logoutButton'
           >
             <i className='fas fa-sign-out-alt'></i>
             Logout
           </Button>
         </Nav.Link>
-        <Form className='mr-md-5' inline>
+       
+        <Form className='' inline>
           <FormControl
             type='text'
             placeholder='Search for Groups'
-            className='mr-md-2'
+            className='mr-1'
+            id="groupSearchBar"
           />
-          <Button variant='outline-success'>
+          <Button variant='outline-success' className="" id="searchBarButton">
             {' '}
+            
             <i className='fas fa-search'></i> Search
           </Button>
         </Form>
+       
       </Nav>
+      
     </div>
   );
 
@@ -64,7 +74,7 @@ export const Navigationbar = ({
               <i className='fas fa-user-plus'></i>
               Register
             </Button>
-            <Button as={Link} to="/login" className='btn-success mr-5' id='loginButton'>
+            <Button as={Link} to="/login" className='btn-success mr-lg-5' id='loginButton'>
               <i className='fas fa-sign-in-alt'></i>
               Login
             </Button>
@@ -75,7 +85,7 @@ export const Navigationbar = ({
   );
 
   return (
-    <Navbar bg='dark' variant='dark' expand='md'>
+    <Navbar bg='dark' variant='dark' expand='lg' className="">
       <Navbar.Brand as={Link} to='/'>
         <i className='fas fa-microphone ml-xl-3'></i> Escapebe
       </Navbar.Brand>
@@ -95,10 +105,7 @@ export const Navigationbar = ({
               <i className='fas fa-info-circle'></i>
               About
             </Nav.Link>
-            <Nav.Link as={Link} to='/faq'>
-              <i className='fas fa-question-circle'></i>
-              FAQ
-            </Nav.Link>
+
             {!loading && (
               <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
             )}
