@@ -29,13 +29,13 @@ export const Navigationbar = ({
         </Nav.Link>
         
         
-        <Nav.Link as={Link} to='/groups'>
+        <Nav.Link as={Link} to='/groups' className="mr-xl-5">
           <i className='fas fa-users'></i>
           Groups
         </Nav.Link>
         
         <Nav.Link onClick={logout} as={Link} to='/'>
-          <Button className='btn-success ml-lg-3' id='logoutButton'>
+          <Button className='btn-success ml-xl-5' id='logoutButton'>
             <i className='fas fa-sign-out-alt'></i>
             Logout
           </Button>
