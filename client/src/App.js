@@ -14,6 +14,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { loadMember } from './redux/actions/auth';
 import setToken from './utilities/setToken';
+import { TinyButton as ScrollUpButton } from 'react-scroll-up-button';
 import './scss/app.styles.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -40,7 +41,7 @@ const App = () => {
       <Router>
         <Fragment>
           <Navigationbar />
-          <Route exact path='/' component={Landing } />
+          <Route exact path='/' component={Landing} />
           <Switch>
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
@@ -58,6 +59,7 @@ const App = () => {
               component={Post}
             />
           </Switch>
+          <ScrollUpButton style={{ background: '#dbdae8' }} />
         </Fragment>
       </Router>
     </Provider>
