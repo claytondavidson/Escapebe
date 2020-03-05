@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createGroup } from '../../../redux/actions/group';
-import { Button, Col, Row, Container, Card } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 const GroupForm = ({ createGroup }) => {
   const [groupData, setGroupData] = useState({
     title: '',
@@ -15,46 +15,45 @@ const GroupForm = ({ createGroup }) => {
     setGroupData({ ...groupData, [e.target.name]: e.target.value });
 
   return (
-    <div className="" style={{ position: "fixed", top:100, right:50  }}>
-      <div className="">
-      <h3>Create a group</h3>
-      <form
-        className='groupform'
-        onSubmit={e => {
-          e.preventDefault();
-          createGroup({
-            title,
-            description
-          });
-          setGroupData({
-            title: '',
-            description: ''
-          
-          });
-        }}
-      >
-        <textarea
-          name='title'
-          placeholder='Name your group'
-          value={title}
-          onChange={e => onChange(e)}
-          required
-        ></textarea>
-        <textarea
-          name='description'
-          placeholder='Write a group description'
-          cols='30'
-          rows='2'
-          value={description}
-          onChange={e => onChange(e)}
-          required
-        ></textarea>
+    <div className='' style={{ position: 'fixed', top: 100, right: 50 }}>
+      <div className=''>
+        <h3>Create a group</h3>
+        <form
+          className='groupform'
+          onSubmit={e => {
+            e.preventDefault();
+            createGroup({
+              title,
+              description
+            });
+            setGroupData({
+              title: '',
+              description: ''
+            });
+          }}
+        >
+          <textarea
+            name='title'
+            placeholder='Name your group'
+            value={title}
+            onChange={e => onChange(e)}
+            required
+          ></textarea>
+          <textarea
+            name='description'
+            placeholder='Write a group description'
+            cols='30'
+            rows='2'
+            value={description}
+            onChange={e => onChange(e)}
+            required
+          ></textarea>
 
-        <Button type='submit' className='btn-success'>
-          Create Group
-        </Button>
-      </form>
-    </div>
+          <Button type='submit' className='btn-success'>
+            Create Group
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };

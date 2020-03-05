@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const CommentItem = ({ comment: { _id, text, username, date } }) => (
-  <div>
+  <Fragment>
     <div>
       <Link to={`/dashboard/${username}`}>
         <h4>{username}</h4>
@@ -13,7 +13,7 @@ const CommentItem = ({ comment: { _id, text, username, date } }) => (
     <div>
       <p>{text}</p>
     </div>
-  </div>
+  </Fragment>
 );
 
 CommentItem.propTypes = {

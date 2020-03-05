@@ -1,62 +1,50 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../../redux/actions/auth';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  Col,
-  Row,
-  Container,
-  Form,
-  FormControl
-} from 'react-bootstrap';
-import Login from '../../auth/Login/Login.component';
-var ReactFitText = require('react-fittext');
+import { Button, Row, Form, FormControl } from 'react-bootstrap';
+//import Login from '../../auth/Login/Login.component';
+//var ReactFitText = require('react-fittext');
+
 export const Navigationbar = ({
   auth: { isAuthenticated, loading },
   logout
 }) => {
   const authLinks = (
     <div>
-      
       <Nav>
-      
         <Nav.Link as={Link} to='/dashboard'>
           <i className='fas fa-tv'></i>
           Dashboard
         </Nav.Link>
-        
-        
-        <Nav.Link as={Link} to='/groups' className="mr-xl-5">
+
+        <Nav.Link as={Link} to='/groups' className='mr-xl-5'>
           <i className='fas fa-users'></i>
           Groups
         </Nav.Link>
-        
+
         <Nav.Link onClick={logout} as={Link} to='/'>
           <Button className='btn-success ml-xl-5' id='logoutButton'>
             <i className='fas fa-sign-out-alt'></i>
             Logout
           </Button>
         </Nav.Link>
-       
+
         <Form className='' inline>
           <FormControl
             type='text'
             placeholder='Search for Groups'
             className='mr-1'
-            id="groupSearchBar"
+            id='groupSearchBar'
           />
-          <Button variant='outline-success' className="" id="searchBarButton">
+          <Button variant='outline-success' className='' id='searchBarButton'>
             {' '}
-            
             <i className='fas fa-search'></i> Search
           </Button>
         </Form>
-       
       </Nav>
-      
     </div>
   );
 
@@ -90,7 +78,7 @@ export const Navigationbar = ({
   );
 
   return (
-    <Navbar bg='dark' variant='dark' expand='lg' className="">
+    <Navbar bg='dark' variant='dark' expand='lg' className=''>
       <Navbar.Brand as={Link} to='/'>
         <i className='fas fa-microphone ml-xl-3'></i> Escapebe
       </Navbar.Brand>

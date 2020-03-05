@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -24,7 +24,7 @@ const EditDashboard = ({
     setDashboardData({
       about: !dashboard.about || loading ? '' : dashboard.about
     });
-  }, [loading]);
+  }, [loading, dashboard.about, getCurrentDashboard]);
 
   const onChange = e =>
     setDashboardData({
