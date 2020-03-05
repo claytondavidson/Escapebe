@@ -56,7 +56,7 @@ export const Navigationbar = ({
             <Button
               as={Link}
               to='/register'
-              className='btn-success ml-md-3 mr-lg-3'
+              className='btn-success ml-lg-3 mr-lg-3'
               id='registerButton'
             >
               <i className='fas fa-user-plus'></i>
@@ -65,7 +65,7 @@ export const Navigationbar = ({
             <Button
               as={Link}
               to='/login'
-              className='btn-success mr-5'
+              className='btn-success mr-5 mt-1 mt-lg-0 '
               id='loginButton'
             >
               <i className='fas fa-sign-in-alt'></i>
