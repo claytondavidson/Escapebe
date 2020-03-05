@@ -17,3 +17,26 @@ export const getCurrentDashboard = () => async dispatch => {
     });
   }
 };
+
+export const createDashboard = (dashboardData, history) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const res = await axios.post('/api/dashboard', dashboardData, config);
+    dispatch({
+      type: GET_DASHBOARD,
+      payload: res.data
+    });
+
+    history.push('/dashboard');
+  } catch (error) {
+    dispatch({
+      type: DASHBOARD_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
+  }
+};

@@ -10,6 +10,7 @@ import Groups from './components/layout/Groups/Groups.component';
 import Group from './components/layout/Group/Group.component';
 import Post from './components/layout/Post/Post.component';
 import CreateDashboard from './components/layout/CreateDashboard/CreateDashboard.component';
+import EditDashboard from './components/layout/EditDashboard/EditDashboard.component';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { loadMember } from './redux/actions/auth';
@@ -50,6 +51,11 @@ const App = () => {
               exact
               path='/create-dashboard'
               component={CreateDashboard}
+            />
+            <ProtectedRoute
+              exact
+              path='/edit-dashboard'
+              component={EditDashboard}
             />
             <ProtectedRoute exact path='/groups' component={Groups} />
             <ProtectedRoute exact path='/group/:id' component={Group} />

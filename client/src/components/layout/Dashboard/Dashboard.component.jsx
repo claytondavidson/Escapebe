@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentDashboard } from '../../../redux/actions/dashboard';
 import Spinner from '../Spinner/Spinner.component';
-import { Nav, Navbar } from 'react-bootstrap';
+import DashboardBehaviors from '../DashboardBehaviors/DashboardBehaviors.component';
+import { Nav } from 'react-bootstrap';
 
 const Dashboard = ({
   getCurrentDashboard,
@@ -22,7 +23,9 @@ const Dashboard = ({
       <h1>Dashboard</h1>
       <p>Welcome {member && member.username}!</p>
       {dashboard !== null ? (
-        <Fragment>has</Fragment>
+        <Fragment>
+          <DashboardBehaviors />
+        </Fragment>
       ) : (
         <Fragment>
           <p>You have not yet set up a dashboard</p>
@@ -33,8 +36,8 @@ const Dashboard = ({
             <Nav.Link as={Link} to='/groups' className='button'>
               Find Groups
             </Nav.Link>
-            <Nav.Link as={Link} to='/' className='button'>
-              Return to Home
+            <Nav.Link as={Link} to='/news' className='button'>
+              Read the News
             </Nav.Link>
           </Nav>
         </Fragment>
