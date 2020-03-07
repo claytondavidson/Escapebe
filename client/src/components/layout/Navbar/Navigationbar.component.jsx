@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { logout } from '../../../redux/actions/auth';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Button, Row, Form, FormControl } from 'react-bootstrap';
+import { Button, Row } from 'react-bootstrap';
+import GroupSearch from '../../search/GroupSearch.component';
 //import Login from '../../auth/Login/Login.component';
 //var ReactFitText = require('react-fittext');
 
@@ -31,19 +32,7 @@ export const Navigationbar = ({
             Logout
           </Button>
         </Nav.Link>
-
-        <Form className='' inline>
-          <FormControl
-            type='text'
-            placeholder='Search for Groups'
-            className='mr-1'
-            id='groupSearchBar'
-          />
-          <Button variant='outline-success' className='' id='searchBarButton'>
-            {' '}
-            <i className='fas fa-search'></i> Search
-          </Button>
-        </Form>
+        <GroupSearch />
       </Nav>
     </div>
   );
@@ -89,10 +78,6 @@ export const Navigationbar = ({
             <Nav.Link as={Link} to='/news'>
               <i className='fas fa-newspaper'></i>
               News
-            </Nav.Link>
-            <Nav.Link as={Link} to='/members'>
-              <i className='fas fa-user-friends'></i>
-              Members
             </Nav.Link>
             <Nav.Link as={Link} to='/about'>
               <i className='fas fa-info-circle'></i>

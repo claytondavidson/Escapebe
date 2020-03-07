@@ -6,7 +6,6 @@ import GroupItem from '../GroupItem/GroupItem.component';
 import { getGroups } from '../../../redux/actions/group';
 import GroupForm from '../GroupForm/GroupForm.component';
 import LazyLoad from 'react-lazyload';
-// import GroupSearch from '../../search/GroupSearch.component';
 
 const Groups = ({ getGroups, group: { groups, loading } }) => {
   useEffect(() => {

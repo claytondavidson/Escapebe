@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 
-const RenderResults = props => {
-  return <div></div>;
-};
-
-RenderResults.propTypes = {};
+const RenderResults = ({ group: { title } }) => (
+  <Fragment>
+    <h4>{title}</h4>
+  </Fragment>
+);
 
 export default RenderResults;
