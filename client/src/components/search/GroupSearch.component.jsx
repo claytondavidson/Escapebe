@@ -40,14 +40,15 @@ const GroupSearch = ({ getGroups, group: { groups } }) => {
           placeholder='Search for groups'
           value={search}
           onChange={handleSearchChange}
+          id="groupSearchBar"
         />
         <div className='groups'>
           {matches.map(match => (
-            <Dropdown.Item
+            <Dropdown.Item id="dropdownId"
               key={match._id}
               as={Link}
               to={`/group/${match._id}`}
-              style={{ color: 'green', size: '12' }}
+              style={{ backgroundColor:"white"}}
             >
               <RenderResults key={match._id} group={match} />
             </Dropdown.Item>

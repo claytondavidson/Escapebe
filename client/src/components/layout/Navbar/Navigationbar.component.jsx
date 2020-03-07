@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { logout } from '../../../redux/actions/auth';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Button, Row } from 'react-bootstrap';
+import { Button, Row, Container } from 'react-bootstrap';
 import GroupSearch from '../../search/GroupSearch.component';
 //import Login from '../../auth/Login/Login.component';
 //var ReactFitText = require('react-fittext');
@@ -32,7 +32,14 @@ export const Navigationbar = ({
             Logout
           </Button>
         </Nav.Link>
+        <div id="searchBarContainer" className="d-none d-lg-block">
+        <div id="searchBar">
         <GroupSearch />
+        </div>
+        </div>
+        <div className="d-block d-lg-none">
+        <GroupSearch />
+        </div>
       </Nav>
     </div>
   );

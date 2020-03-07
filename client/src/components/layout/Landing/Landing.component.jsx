@@ -10,6 +10,7 @@ export const Landing = () => {
   return (
     <div>
       <div className=''>
+        
         <Register />
       </div>
     </div>
