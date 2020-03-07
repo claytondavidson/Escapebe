@@ -1,4 +1,9 @@
-import { GET_DASHBOARD, DASHBOARD_ERROR, CLEAR_USER } from '../actions/types';
+import {
+  GET_DASHBOARD,
+  DASHBOARD_ERROR,
+  CLEAR_USER,
+  GET_DASHBOARDS
+} from '../actions/types';
 
 const initialState = {
   dashboard: null,
@@ -15,6 +20,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         dashboard: payload,
+        loading: false
+      };
+    case GET_DASHBOARDS:
+      return {
+        ...state,
+        dashboards: payload,
         loading: false
       };
     case DASHBOARD_ERROR:

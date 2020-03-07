@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-import { GET_DASHBOARD, DASHBOARD_ERROR } from './types';
+import {
+  GET_DASHBOARD,
+  DASHBOARD_ERROR,
+  GET_DASHBOARDS,
+  CLEAR_USER
+} from './types';
 
 export const getCurrentDashboard = () => async dispatch => {
   try {
@@ -8,6 +13,42 @@ export const getCurrentDashboard = () => async dispatch => {
 
     dispatch({
       type: GET_DASHBOARD,
+      payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type: DASHBOARD_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
+  }
+};
+
+export const getDashboards = () => async dispatch => {
+  dispatch({ type: CLEAR_USER });
+
+  try {
+    const res = await axios.get('/api/dashboard');
+
+    dispatch({
+      type: GET_DASHBOARDS,
+      payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type: DASHBOARD_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
+  }
+};
+
+export const getDashboardById = memberId => async dispatch => {
+  dispatch({ type: CLEAR_USER });
+
+  try {
+    const res = await axios.get(`/api/dashboard/members/${memberId}`);
+
+    dispatch({
+      type: GET_DASHBOARDS,
       payload: res.data
     });
   } catch (error) {

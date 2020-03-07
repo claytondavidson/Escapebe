@@ -6,6 +6,7 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT = 'LOGOUT';
 export const GET_DASHBOARD = 'GET_DASHBOARD';
+export const GET_DASHBOARDS = 'GET_DASHBOARDS';
 export const DASHBOARD_ERROR = 'DASHBOARD_ERROR';
 export const CLEAR_USER = 'CLEAR_USER';
 export const GET_GROUPS = 'GET_GROUPS';
