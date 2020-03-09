@@ -48,7 +48,7 @@ const Register = ({ register, isAuthenticated }) => {
                     <h1>Register</h1>
                     <p>Please fill in this form to create an account.</p>
                     <Form onSubmit={e => onSubmit(e)}>
-                      <Form.Group controlId='formBasicEmail'>
+                      <Form.Group>
                         <Form.Label>Username</Form.Label>
                         <Form.Control
                           type='text'
@@ -68,7 +68,7 @@ const Register = ({ register, isAuthenticated }) => {
                           onChange={e => onChange(e)}
                         />
                       </Form.Group>
-                      <Form.Group controlId='formBasicPassword'>
+                      <Form.Group controlId='formPassword'>
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                           type='password'

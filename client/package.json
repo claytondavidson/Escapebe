@@ -18,12 +18,10 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "react-scroll-up-button": "^1.6.4",
-    "reactstrap": "^8.4.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "rfs": "^9.0.2",
-    "uuid": "^3.4.0",
     "webpack": "^4.41.6"
   },
   "scripts": {

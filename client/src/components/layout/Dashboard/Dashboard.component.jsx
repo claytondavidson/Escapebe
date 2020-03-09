@@ -6,15 +6,18 @@ import { getCurrentDashboard } from '../../../redux/actions/dashboard';
 import Spinner from '../Spinner/Spinner.component';
 import DashboardBehaviors from '../DashboardBehaviors/DashboardBehaviors.component';
 import { Nav } from 'react-bootstrap';
+import { getGroups } from '../../../redux/actions/group';
 
 const Dashboard = ({
   getCurrentDashboard,
   auth: { member },
-  dashboard: { dashboard, loading }
+  dashboard: { dashboard, loading },
+  getGroups
 }) => {
   useEffect(() => {
+    getGroups();
     getCurrentDashboard();
-  }, [getCurrentDashboard]);
+  }, [getCurrentDashboard, getGroups]);
 
   return loading && dashboard === null ? (
     <Spinner />
@@ -49,12 +52,16 @@ const Dashboard = ({
 Dashboard.propTypes = {
   getCurrentDashboard: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  dashboard: PropTypes.object.isRequired
+  dashboard: PropTypes.object.isRequired,
+  getGroups: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  dashboard: state.dashboard
+  dashboard: state.dashboard,
+  group: state.group
 });
 
-export default connect(mapStateToProps, { getCurrentDashboard })(Dashboard);
+export default connect(mapStateToProps, { getCurrentDashboard, getGroups })(
+  Dashboard
+);
