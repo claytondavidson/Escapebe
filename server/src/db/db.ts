@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
-const config = require('config');
-const uri = config.get('mongo');
+import { connect } from 'mongoose';
+import { get } from 'config';
 
-const connectMongo = async () => {
+export const connectMongo = async () => {
   try {
-    await mongoose.connect(uri, {
+    await connect(get('mongo'), {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
@@ -16,5 +15,3 @@ const connectMongo = async () => {
     process.exit(1);
   }
 };
-
-module.exports = connectMongo;

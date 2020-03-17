@@ -6,7 +6,7 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-const Member = require('../models/Member');
+import Member from '../models/Member';
 
 router.get('/', auth, async (req, res) => {
   try {

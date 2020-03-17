@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
-const Group = require('../models/Group');
-const Member = require('../models/Member');
+import Group from '../models/Group';
+import Member from '../models/Member';
 
 router.post(
   '/',

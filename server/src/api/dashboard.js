@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('./../middleware/auth');
-const Dashboard = require('../models/Dashboard');
-const Member = require('../models/Member');
+const auth = require('../middleware/auth');
+import Dashboard from '../models/Dashboard';
+import Member from '../models/Member';
 const { check, validationResult } = require('express-validator');
 
 router.get('/member', auth, async (req, res) => {
