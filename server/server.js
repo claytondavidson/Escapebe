@@ -1,5 +1,5 @@
 const express = require('express');
-connectMongo = require('./src/config/db');
+connectMongo = require('./src/db/db');
 const cookie = require('cookie-session');
 const config = require('config');
 
