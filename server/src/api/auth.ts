@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const { check, validationResult } = require('express-validator');
-const config = require('config');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+import { check, validationResult } from 'express-validator';
+import { get } from 'config';
+import { sign } from 'jsonwebtoken';
+import { compare } from 'bcryptjs';
 
 import Member from '../models/Member';
 
@@ -42,7 +42,7 @@ router.post(
         res.status(400).json({ errors: [{ msg: 'invalid credentials' }] });
       }
 
-      const match = await bcrypt.compare(password, member.password);
+      const match = await compare(password, member.password);
 
       if (!match) {
         req.session.login_attempts = (req.session.login_attempts || 0) + 1;
@@ -56,9 +56,9 @@ router.post(
         member: { id: member.id }
       };
 
-      jwt.sign(
+      sign(
         payload,
-        config.get('jsonwebtokensecret'),
+        get('jsonwebtokensecret'),
         {
           expiresIn: 36000
         },

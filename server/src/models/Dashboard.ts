@@ -1,8 +1,15 @@
-import mongoose from 'mongoose';
+import { Document, Schema, model } from 'mongoose';
 
-export const DashboardSchema = new mongoose.Schema({
+export interface IDashboard extends Document {
+  username: string;
+  email: string;
+  password: string;
+  date: Date;
+}
+
+export const DashboardSchema = new Schema({
   member: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'member'
   },
   alias: {
@@ -13,5 +20,5 @@ export const DashboardSchema = new mongoose.Schema({
   }
 });
 
-const Dashboard = mongoose.model('dashboard', DashboardSchema);
+const Dashboard = model<IDashboard>('dashboard', DashboardSchema);
 export default Dashboard;

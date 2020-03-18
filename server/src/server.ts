@@ -23,6 +23,6 @@ app.use('/api/auth', require('./api/auth'));
 app.use('/api/groups', require('./api/groups'));
 app.use('/api/dashboard', require('./api/dashboard'));
 
-const port = process.env.port || 4000;
+const port: string | number = process.env.port || 4000;
 
 app.listen(port, () => console.log(`server started on port ${port}`));

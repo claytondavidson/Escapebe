@@ -1,8 +1,49 @@
-import mongoose from 'mongoose';
+import { Document, Schema, model } from 'mongoose';
 
-export const GroupSchema = new mongoose.Schema({
+export interface IGroup extends Document {
+  member: Schema.Types.ObjectId;
+  title: string;
+  description: string;
+  picture: string;
+  subscribers: [
+    {
+      member: Schema.Types.ObjectId;
+    }
+  ];
+  cover_photo: string;
+  posts: [
+    {
+      member: Schema.Types.ObjectId;
+      username: string;
+      title: string;
+      text: string;
+      upvotes: [
+        {
+          member: Schema.Types.ObjectId;
+        }
+      ];
+      comments: [
+        {
+          member: Schema.Types.ObjectId;
+          username: string;
+          text: string;
+          upvotes: [
+            {
+              member: Schema.Types.ObjectId;
+            }
+          ];
+          date: Date;
+        }
+      ];
+      date: Date;
+    }
+  ];
+  date_created: Date;
+}
+
+export const GroupSchema = new Schema({
   member: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'members'
   },
   title: {
@@ -19,7 +60,7 @@ export const GroupSchema = new mongoose.Schema({
   subscribers: [
     {
       member: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'members'
       }
     }
@@ -30,7 +71,7 @@ export const GroupSchema = new mongoose.Schema({
   posts: [
     {
       member: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'members'
       },
       username: {
@@ -47,7 +88,7 @@ export const GroupSchema = new mongoose.Schema({
       upvotes: [
         {
           member: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'members'
           }
         }
@@ -55,7 +96,7 @@ export const GroupSchema = new mongoose.Schema({
       comments: [
         {
           member: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'members'
           },
           username: {
@@ -68,7 +109,7 @@ export const GroupSchema = new mongoose.Schema({
           upvotes: [
             {
               member: {
-                type: mongoose.Schema.Types.ObjectId,
+                type: Schema.Types.ObjectId,
                 ref: 'members'
               }
             }
@@ -91,5 +132,5 @@ export const GroupSchema = new mongoose.Schema({
   }
 });
 
-const Group = mongoose.model('group', GroupSchema);
+const Group = model<IGroup>('group', GroupSchema);
 export default Group;

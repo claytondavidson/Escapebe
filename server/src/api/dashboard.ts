@@ -32,7 +32,7 @@ router.post('/', auth, async (req, res) => {
 
   const { alias, about } = req.body;
 
-  const dashboardFields = {};
+  const dashboardFields: any = {};
   dashboardFields.member = req.member.id;
   if (alias) dashboardFields.alias = alias;
   if (about) dashboardFields.about = about;
