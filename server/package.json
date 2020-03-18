@@ -11,6 +11,7 @@
   "author": "Clayton Davidson, Justin Brown",
   "license": "ISC",
   "dependencies": {
+    "@types/express-serve-static-core": "^4.17.2",
     "bcryptjs": "^2.4.3",
     "config": "^3.2.5",
     "cookie-session": "^1.4.0",
@@ -29,6 +30,7 @@
     "@types/express": "^4.17.3",
     "@types/jsonwebtoken": "^8.3.8",
     "@types/mongoose": "^5.7.6",
+    "@types/node": "^13.9.1",
     "concurrently": "^5.1.0",
     "nodemon": "^2.0.2"
   }

@@ -1,16 +1,18 @@
-const express = require('express');
-const router = express.Router();
-const auth = require('../middleware/auth');
+import { Router, Request, Response } from 'express';
+import { authToken as auth } from '../middleware/auth';
 import { check, validationResult } from 'express-validator';
 import { get } from 'config';
 import { sign } from 'jsonwebtoken';
 import { compare } from 'bcryptjs';
-
 import Member from '../models/Member';
 
-router.get('/', auth, async (req, res) => {
+const router = Router();
+
+router.get('/', auth, async (req: Request, res: Response) => {
   try {
-    const member = await Member.findById(req.member.id).select('-password');
+    const member = await Member.findById((<any>req).member.id).select(
+      '-password'
+    );
     res.json(member);
   } catch (error) {
     console.error(error.message);
@@ -24,7 +26,7 @@ router.post(
     check('email', 'a valid email is required').isEmail(),
     check('password', 'password is required').exists()
   ],
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     if (req.session.login_attempts > 10) {
       return res.status(400).json({ msg: 'stop trying to bruteforce' });
     }
@@ -74,4 +76,4 @@ router.post(
   }
 );
 
-module.exports = router;
+export = router;

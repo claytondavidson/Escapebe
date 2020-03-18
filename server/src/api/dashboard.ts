@@ -1,14 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const auth = require('../middleware/auth');
+import { Router, Request, Response } from 'express';
+import { authToken as auth } from '../middleware/auth';
+import { validationResult } from 'express-validator';
 import Dashboard from '../models/Dashboard';
 import Member from '../models/Member';
-const { check, validationResult } = require('express-validator');
 
-router.get('/member', auth, async (req, res) => {
+const router = Router();
+
+router.get('/member', auth, async (req: Request, res: Response) => {
   try {
     const dashboard = await Dashboard.findOne({
-      member: req.member.id
+      member: (<any>req).member.id
     }).populate('member', ['alias']);
 
     if (!dashboard) {
@@ -24,7 +25,7 @@ router.get('/member', auth, async (req, res) => {
   }
 });
 
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, async (req: Request, res: Response) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array });
@@ -33,16 +34,16 @@ router.post('/', auth, async (req, res) => {
   const { alias, about } = req.body;
 
   const dashboardFields: any = {};
-  dashboardFields.member = req.member.id;
+  dashboardFields.member = (<any>req).member.id;
   if (alias) dashboardFields.alias = alias;
   if (about) dashboardFields.about = about;
 
   try {
-    let dashboard = await Dashboard.findOne({ member: req.member.id });
+    let dashboard = await Dashboard.findOne({ member: (<any>req).member.id });
 
     if (dashboard) {
       dashboard = await Dashboard.findOneAndUpdate(
-        { member: req.member.id },
+        { member: (<any>req).member.id },
         { $set: dashboardFields },
         { new: true }
       );
@@ -60,7 +61,7 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
     const dashboards = await Dashboard.find().populate('member', ['username']);
     res.json(dashboards);
@@ -70,7 +71,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/members/:member_id', async (req, res) => {
+router.get('/members/:member_id', async (req: Request, res: Response) => {
   try {
     const dashboard = await Dashboard.findOne({
       member: req.params.member_id
@@ -89,12 +90,12 @@ router.get('/members/:member_id', async (req, res) => {
   }
 });
 
-router.delete('/', auth, async (req, res) => {
+router.delete('/', auth, async (req: Request, res: Response) => {
   try {
     // @TODO remove member's posts on removal
-    await Dashboard.findOneAndRemove({ member: req.member.id });
+    await Dashboard.findOneAndRemove({ member: (<any>req).member.id });
 
-    await Member.findOneAndRemove({ _id: req.member.id });
+    await Member.findOneAndRemove({ _id: (<any>req).member.id });
 
     res.json({ msg: 'member removed' });
   } catch (error) {
@@ -103,4 +104,4 @@ router.delete('/', auth, async (req, res) => {
   }
 });
 
-module.exports = router;
+export = router;

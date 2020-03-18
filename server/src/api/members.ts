@@ -1,10 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const { check, validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const config = require('config');
+import { Router, Request, Response } from 'express';
+import { check, validationResult } from 'express-validator';
+import { genSalt, hash } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
+import { get } from 'config';
 import Member from '../models/Member';
+
+const router = Router();
 
 router.post(
   '/',
@@ -18,7 +19,7 @@ router.post(
       'please enter a password with 6 or more characters'
     ).isLength({ min: 6 })
   ],
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -38,17 +39,17 @@ router.post(
         password
       });
 
-      const salt = await bcrypt.genSalt(10);
-      member.password = await bcrypt.hash(password, salt);
+      const salt = await genSalt(10);
+      member.password = await hash(password, salt);
       await member.save();
 
       const payload = {
         member: { id: member.id }
       };
 
-      jwt.sign(
+      sign(
         payload,
-        config.get('jsonwebtokensecret'),
+        get('jsonwebtokensecret'),
         {
           expiresIn: 3600
         },
@@ -64,4 +65,4 @@ router.post(
   }
 );
 
-module.exports = router;
+export = router;

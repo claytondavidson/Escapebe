@@ -1,9 +1,10 @@
 const express = require('express');
-const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const auth = require('../middleware/auth');
+import { authToken as auth } from '../middleware/auth';
 import Group from '../models/Group';
 import Member from '../models/Member';
+
+const router = express.Router();
 
 router.post(
   '/',
