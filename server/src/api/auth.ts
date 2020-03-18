@@ -27,7 +27,7 @@ router.post(
     check('password', 'password is required').exists()
   ],
   async (req: Request, res: Response) => {
-    if (req.session.login_attempts > 10) {
+    if (req.session!.login_attempts > 10) {
       return res.status(400).json({ msg: 'stop trying to bruteforce' });
     }
 
@@ -44,18 +44,18 @@ router.post(
         res.status(400).json({ errors: [{ msg: 'invalid credentials' }] });
       }
 
-      const match = await compare(password, member.password);
+      const match = await compare(password, member!.password);
 
       if (!match) {
-        req.session.login_attempts = (req.session.login_attempts || 0) + 1;
-        console.log(req.session.login_attempts);
+        req.session!.login_attempts = (req.session!.login_attempts || 0) + 1;
+        console.log(req.session!.login_attempts);
         return res
           .status(400)
           .json({ errors: [{ msg: 'invalid credentials' }] });
       }
 
       const payload = {
-        member: { id: member.id }
+        member: { id: member!.id }
       };
 
       sign(

@@ -1,6 +1,7 @@
 import { Document, Schema, model } from 'mongoose';
 
 export interface IDashboard extends Document {
+  id: string;
   username: string;
   email: string;
   password: string;

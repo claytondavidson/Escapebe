@@ -5,40 +5,10 @@ export interface IGroup extends Document {
   title: string;
   description: string;
   picture: string;
-  subscribers: [
-    {
-      member: Schema.Types.ObjectId;
-    }
-  ];
+  subscribers: any[];
   cover_photo: string;
-  posts: [
-    {
-      member: Schema.Types.ObjectId;
-      username: string;
-      title: string;
-      text: string;
-      upvotes: [
-        {
-          member: Schema.Types.ObjectId;
-        }
-      ];
-      comments: [
-        {
-          member: Schema.Types.ObjectId;
-          username: string;
-          text: string;
-          upvotes: [
-            {
-              member: Schema.Types.ObjectId;
-            }
-          ];
-          date: Date;
-        }
-      ];
-      date: Date;
-    }
-  ];
   date_created: Date;
+  posts: any[];
 }
 
 export const GroupSchema = new Schema({
