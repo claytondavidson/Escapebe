@@ -41,11 +41,11 @@ class Server {
     );
   }
 
-  public start(): void {
+  private start(): void {
     this.app.listen(this.port, (): void => {
       console.log(`server started on port ${this.port}`);
     });
   }
 }
 
-const server = new Server();
+new Server();
