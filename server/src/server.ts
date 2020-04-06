@@ -2,6 +2,11 @@ import { connectMongo } from './db/db';
 import express, { Application } from 'express';
 import cookie from 'cookie-session';
 import { get } from 'config';
+import './controllers/AuthenticationController';
+import './controllers/DashboardController';
+import './controllers/MembersController';
+import './controllers/GroupsController';
+import { ServerRouter } from './ServerRouter';
 
 class Server {
   public app: Application;
@@ -25,10 +30,7 @@ class Server {
   }
 
   private initializeControllers(): void {
-    this.app.use('/api/members', require('./api/members'));
-    this.app.use('/api/auth', require('./api/auth'));
-    this.app.use('/api/groups', require('./api/groups'));
-    this.app.use('/api/dashboard', require('./api/dashboard'));
+    this.app.use(ServerRouter.getInstance());
   }
 
   private initializeSession(): void {
@@ -36,7 +38,7 @@ class Server {
       cookie({
         name: 'session',
         keys: [get('cookie')],
-        maxAge: 1350 * 1000
+        maxAge: 1350 * 1000,
       })
     );
   }

@@ -1,25 +1,23 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
 import { genSalt, hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import { get } from 'config';
+import config from 'config';
 import Member from '../models/Member';
+import { controller, post, use } from './decorators';
 
-const router = Router();
-
-router.post(
-  '/',
-  [
-    check('username', 'a username is required')
-      .not()
-      .isEmpty(),
-    check('email', 'a valid email is required').isEmail(),
+@controller('/api/members')
+class MembersController {
+  @post('/')
+  @use(check('username', 'a username is required').not().isEmpty())
+  @use(check('email', 'a valid email is required').isEmail())
+  @use(
     check(
       'password',
       'please enter a password with 6 or more characters'
     ).isLength({ min: 6 })
-  ],
-  async (req: Request, res: Response) => {
+  )
+  protected async RegisterMember(req: Request, res: Response) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -36,7 +34,7 @@ router.post(
       member = new Member({
         username,
         email,
-        password
+        password,
       });
 
       const salt = await genSalt(10);
@@ -44,14 +42,14 @@ router.post(
       await member.save();
 
       const payload = {
-        member: { id: member.id }
+        member: { id: member.id },
       };
 
       sign(
         payload,
-        get('jsonwebtokensecret'),
+        config.get('jsonwebtokensecret'),
         {
-          expiresIn: 3600
+          expiresIn: 3600,
         },
         (error, token) => {
           if (error) throw error;
@@ -63,6 +61,4 @@ router.post(
       res.status(500).send('server error');
     }
   }
-);
-
-export = router;
+}

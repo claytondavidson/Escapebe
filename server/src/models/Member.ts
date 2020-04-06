@@ -1,4 +1,5 @@
 import { Document, Schema, model } from 'mongoose';
+import { ValidationSchema } from 'express-validator';
 
 export interface IMember extends Document {
   id: string;
@@ -12,21 +13,21 @@ export const MemberSchema = new Schema({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 const Member = model<IMember>('member', MemberSchema);

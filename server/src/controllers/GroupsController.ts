@@ -1,23 +1,19 @@
-import { Request, Response, Router } from 'express';
+import { Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
 import { authToken as auth } from '../middleware/auth';
 import Group from '../models/Group';
 import Member from '../models/Member';
+import { get, use, controller, post, put } from './decorators';
 
-const router = Router();
-
-router.post(
-  '/',
-  auth,
-  [
-    check('title', 'you must include a title')
-      .not()
-      .isEmpty(),
-    check('description', 'you must write a group description')
-      .not()
-      .isEmpty()
-  ],
-  async (req: Request, res: Response) => {
+@controller('/api/groups')
+class GroupsController {
+  @post('/')
+  @use(auth)
+  @use(check('title', 'you must include a title').not().isEmpty())
+  @use(
+    check('description', 'you must write a group description').not().isEmpty()
+  )
+  protected async createGroup(req: Request, res: Response) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -32,7 +28,7 @@ router.post(
         title: req.body.title,
         description: req.body.description,
         member: (<any>req).member.id,
-        username: member!.username
+        username: member!.username,
       });
 
       const group = await newGroup.save();
@@ -42,68 +38,66 @@ router.post(
       res.status(500).send('server error');
     }
   }
-);
 
-router.get('/', auth, async (req: Request, res: Response) => {
-  try {
-    const groups = await Group.find().sort({ date: -1 });
-    res.json(groups);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('server error');
+  @get('/')
+  @use(auth)
+  protected async getAllGroups(req: Request, res: Response) {
+    try {
+      const groups = await Group.find().sort({ date: -1 });
+      res.json(groups);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('server error');
+    }
   }
-});
 
-router.get('/:id', auth, async (req: Request, res: Response) => {
-  try {
-    const group = await Group.findById(req.params.id);
+  @get('/:id')
+  @use(auth)
+  protected async getGroupById(req: Request, res: Response) {
+    try {
+      const group = await Group.findById(req.params.id);
 
-    if (!group) {
-      return res.status(404).json({ msg: 'group does not exist' });
+      if (!group) {
+        return res.status(404).json({ msg: 'group does not exist' });
+      }
+
+      res.json(group);
+    } catch (error) {
+      console.error(error.message);
+      if (error.kind === 'ObjectId') {
+        return res.status(404).json({ msg: 'group not found' });
+      }
+      res.status(500).send('server error');
     }
-
-    res.json(group);
-  } catch (error) {
-    console.error(error.message);
-    if (error.kind === 'ObjectId') {
-      return res.status(404).json({ msg: 'group not found' });
-    }
-    res.status(500).send('server error');
   }
-});
 
-router.get('/:group_id/:post_id', auth, async (req: Request, res: Response) => {
-  try {
-    const group = await Group.findById(req.params.group_id);
+  @get('/:group_id/:post_id')
+  @use(auth)
+  protected async getPostById(req: Request, res: Response) {
+    try {
+      const group = await Group.findById(req.params.group_id);
 
-    const post = group!.posts.find(post => post.id === req.params.post_id);
+      const post = group!.posts.find((post) => post.id === req.params.post_id);
 
-    if (!post) {
-      return res.status(404).json({ msg: 'post does not exist' });
+      if (!post) {
+        return res.status(404).json({ msg: 'post does not exist' });
+      }
+
+      res.json(post);
+    } catch (error) {
+      console.error(error.message);
+      if (error.kind === 'ObjectId') {
+        return res.status(404).json({ msg: 'post not found' });
+      }
+      res.status(500).send('server error');
     }
-
-    res.json(post);
-  } catch (error) {
-    console.error(error.message);
-    if (error.kind === 'ObjectId') {
-      return res.status(404).json({ msg: 'post not found' });
-    }
-    res.status(500).send('server error');
   }
-});
 
-router.post(
-  '/post/:id',
-  auth,
-  [
-    check('title', 'you must include a title')
-      .not()
-      .isEmpty(),
-    check('text', 'you must include text')
-      .not()
-      .isEmpty()
-  ],
-  async (req: Request, res: Response) => {
+  @post('/post/:id')
+  @use(auth)
+  @use(check('title', 'you must include a title').not().isEmpty())
+  @use(check('text', 'you must include text').not().isEmpty())
+  protected async createPost(req: Request, res: Response) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -119,7 +113,7 @@ router.post(
         title: req.body.title,
         text: req.body.text,
         member: (<any>req).member.id,
-        username: member!.username
+        username: member!.username,
       };
 
       group!.posts.unshift(newPost);
@@ -132,17 +126,11 @@ router.post(
       res.status(500).send('server error');
     }
   }
-);
 
-router.post(
-  '/comment/:group_id/:post_id',
-  auth,
-  [
-    check('text', 'you must include text')
-      .not()
-      .isEmpty()
-  ],
-  async (req: Request, res: Response) => {
+  @post('/comment/:group_id/:post_id')
+  @use(auth)
+  @use(check('text', 'you must include text').not().isEmpty())
+  protected async createComment(req: Request, res: Response) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -154,7 +142,7 @@ router.post(
       );
       const group = await Group.findById(req.params.group_id);
 
-      const post = group!.posts.find(post => post.id === req.params.post_id);
+      const post = group!.posts.find((post) => post.id === req.params.post_id);
 
       if (!post) {
         return res.status(404).json({ msg: 'Post does not exist' });
@@ -163,7 +151,7 @@ router.post(
       const newComment = {
         text: req.body.text,
         member: (<any>req).member.id,
-        username: member!.username
+        username: member!.username,
       };
 
       post.comments.unshift(newComment);
@@ -176,15 +164,13 @@ router.post(
       res.status(500).send('server error');
     }
   }
-);
 
-router.put(
-  '/upvote/:id/:post_id',
-  auth,
-  async (req: Request, res: Response) => {
+  @put('/upvote/:id/:post_id')
+  @use(auth)
+  protected async upvotePost(req: Request, res: Response) {
     try {
       const group = await Group.findById(req.params.id);
-      const post = group!.posts.find(post => post.id === req.params.post_id);
+      const post = group!.posts.find((post) => post.id === req.params.post_id);
 
       if (!post) {
         return res.status(404).json({ msg: 'Post does not exist' });
@@ -209,15 +195,13 @@ router.put(
       res.status(500).send('server error');
     }
   }
-);
 
-router.put(
-  '/unupvote/:id/:post_id',
-  auth,
-  async (req: Request, res: Response) => {
+  @put('/unupvote/:id/:post_id')
+  @use(auth)
+  protected async unupvotePost(req: Request, res: Response) {
     try {
       const group = await Group.findById(req.params.id);
-      const post = group!.posts.find(post => post.id === req.params.post_id);
+      const post = group!.posts.find((post) => post.id === req.params.post_id);
 
       if (!post) {
         return res.status(404).json({ msg: 'Post does not exist' });
@@ -240,6 +224,4 @@ router.put(
       res.status(500).send('server error');
     }
   }
-);
-
-module.exports = router;
+}

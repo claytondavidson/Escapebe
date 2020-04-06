@@ -1,32 +1,32 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { authToken as auth } from '../middleware/auth';
 import { check, validationResult } from 'express-validator';
-import { get } from 'config';
+import config from 'config';
 import { sign } from 'jsonwebtoken';
 import { compare } from 'bcryptjs';
+import { get, use, controller, post } from './decorators';
 import Member from '../models/Member';
 
-const router = Router();
-
-router.get('/', auth, async (req: Request, res: Response) => {
-  try {
-    const member = await Member.findById((<any>req).member.id).select(
-      '-password'
-    );
-    res.json(member);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('server error');
+@controller('/api/auth')
+class AuthenticationController {
+  @get('/')
+  @use(auth)
+  protected async getMember(req: Request, res: Response) {
+    try {
+      const member = await Member.findById((<any>req).member.id).select(
+        '-password'
+      );
+      res.json(member);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('server error');
+    }
   }
-});
 
-router.post(
-  '/',
-  [
-    check('email', 'a valid email is required').isEmail(),
-    check('password', 'password is required').exists()
-  ],
-  async (req: Request, res: Response) => {
+  @post('/')
+  @use(check('email', 'a valid email is required').isEmail())
+  @use(check('password', 'password is required').exists())
+  protected async loginMember(req: Request, res: Response) {
     if (req.session!.login_attempts > 10) {
       return res.status(400).json({ msg: 'stop trying to bruteforce' });
     }
@@ -55,14 +55,14 @@ router.post(
       }
 
       const payload = {
-        member: { id: member!.id }
+        member: { id: member!.id },
       };
 
       sign(
         payload,
-        get('jsonwebtokensecret'),
+        config.get('jsonwebtokensecret'),
         {
-          expiresIn: 36000
+          expiresIn: 36000,
         },
         (error, token) => {
           if (error) throw error;
@@ -74,6 +74,4 @@ router.post(
       res.status(500).send('server error');
     }
   }
-);
-
-export = router;
+}
