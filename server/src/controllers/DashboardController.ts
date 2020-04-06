@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { authToken as auth } from '../middleware/auth';
 import { validationResult } from 'express-validator';
 import Dashboard from '../models/Dashboard';

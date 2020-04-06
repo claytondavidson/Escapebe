@@ -1,5 +1,4 @@
 import { Document, Schema, model } from 'mongoose';
-import { ValidationSchema } from 'express-validator';
 
 export interface IMember extends Document {
   id: string;
