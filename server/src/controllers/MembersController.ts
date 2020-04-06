@@ -7,7 +7,7 @@ import Member from '../models/Member';
 import { controller, post, use } from './decorators';
 
 @controller('/api/members')
-class MembersController {
+export class MembersController {
   @post('/')
   @use(check('username', 'a username is required').not().isEmpty())
   @use(check('email', 'a valid email is required').isEmail())

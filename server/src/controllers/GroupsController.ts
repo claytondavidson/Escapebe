@@ -6,7 +6,7 @@ import Member from '../models/Member';
 import { get, use, controller, post, put } from './decorators';
 
 @controller('/api/groups')
-class GroupsController {
+export class GroupsController {
   @post('/')
   @use(auth)
   @use(check('title', 'you must include a title').not().isEmpty())

@@ -8,7 +8,7 @@ import { get, use, controller, post } from './decorators';
 import Member from '../models/Member';
 
 @controller('/api/auth')
-class AuthenticationController {
+export class AuthenticationController {
   @get('/')
   @use(auth)
   protected async getMember(req: Request, res: Response) {

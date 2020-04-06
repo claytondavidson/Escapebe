@@ -6,7 +6,7 @@ import Member from '../models/Member';
 import { get, use, controller, post, del } from './decorators';
 
 @controller('/api/dashboard')
-class DashboardController {
+export class DashboardController {
   @get('/member')
   @use(auth)
   protected async getAuthenticatedDashboard(req: Request, res: Response) {
