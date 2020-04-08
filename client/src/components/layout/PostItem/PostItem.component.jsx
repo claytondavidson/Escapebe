@@ -21,7 +21,7 @@ const PostItem = ({
         </div>
         <p>{title}</p>
         <p>{text}</p>
-        {
+        {/*
           <button
             onClick={() => dispatch(upvotePost(groupId, _id))}
             type='button'
@@ -31,7 +31,7 @@ const PostItem = ({
             <i className='fas fa-thumbs-up'></i>{' '}
             <span> {upvotes.length > 0 && <span>{upvotes.length}</span>} </span>{' '}
           </button>
-        }
+        */}
         <p>
           Posted on <Moment format='MM/DD/YYYY'>{date}</Moment>
         </p>
