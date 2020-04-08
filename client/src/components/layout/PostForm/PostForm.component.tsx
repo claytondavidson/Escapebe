@@ -43,8 +43,8 @@ const PostForm = ({ groupId }) => {
         <textarea
           name='text'
           placeholder='Write your post here'
-          cols='30'
-          rows='2'
+          cols={30}
+          rows={2}
           value={text}
           onChange={(e) => onChange(e)}
           required

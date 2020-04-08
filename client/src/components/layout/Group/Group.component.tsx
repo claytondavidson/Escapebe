@@ -11,7 +11,7 @@ import LazyLoad from 'react-lazyload';
 const Group = ({ match }) => {
   const [loadingGroup, setLoadingGroup] = useState(true);
   const dispatch = useDispatch();
-  const group = useSelector((state) => state.group.group);
+  const group = useSelector((state: any) => state.group.group);
 
   useEffect(() => {
     (() => {

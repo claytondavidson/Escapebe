@@ -8,8 +8,10 @@ import GroupSearch from '../../search/GroupSearch.component';
 
 export const Navigationbar = () => {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const loading = useSelector((state) => state.auth.loading);
+  const isAuthenticated = useSelector(
+    (state: any) => state.auth.isAuthenticated
+  );
+  const loading = useSelector((state: any) => state.auth.loading);
   const authLinks = (
     <div>
       <Nav>

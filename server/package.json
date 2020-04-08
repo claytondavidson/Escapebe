@@ -21,7 +21,7 @@
     "mongoose": "^5.9.1",
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
-    "webpack": "^4.41.6"
+    "webpack": "^4.41.5"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

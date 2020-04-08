@@ -6,8 +6,8 @@ import {
 } from '../../../redux/actions/dashboard';
 
 const EditDashboard = ({ history }) => {
-  const dashboard = useSelector((state) => state.dashboard.dashboard);
-  const loading = useSelector((state) => state.dashboard.loading);
+  const dashboard = useSelector((state: any) => state.dashboard.dashboard);
+  const loading = useSelector((state: any) => state.dashboard.loading);
   const dispatch = useDispatch();
   const [dashboardData, setDashboardData] = useState({
     about: '',

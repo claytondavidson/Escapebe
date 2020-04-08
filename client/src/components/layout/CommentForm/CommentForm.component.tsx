@@ -33,8 +33,8 @@ const CommentForm = ({ groupId, postId }) => {
         <textarea
           name='text'
           placeholder='Write your comment here'
-          cols='30'
-          rows='2'
+          cols={30}
+          rows={2}
           value={text}
           onChange={(e) => onChange(e)}
           required

@@ -7,8 +7,8 @@ import GroupForm from '../GroupForm/GroupForm.component';
 import LazyLoad from 'react-lazyload';
 
 const Groups = () => {
-  const groups = useSelector((state) => state.group.groups);
-  const loading = useSelector((state) => state.group.loading);
+  const groups = useSelector((state: any) => state.group.groups);
+  const loading = useSelector((state: any) => state.group.loading);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGroups());

@@ -13,9 +13,9 @@ const Dashboard = () => {
     dispatch(getGroups());
     dispatch(getCurrentDashboard());
   }, [dispatch]);
-  const member = useSelector((state) => state.auth.member);
-  const dashboard = useSelector((state) => state.dashboard.dashboard);
-  const loading = useSelector((state) => state.dashboard.loading);
+  const member = useSelector((state: any) => state.auth.member);
+  const dashboard = useSelector((state: any) => state.dashboard.dashboard);
+  const loading = useSelector((state: any) => state.dashboard.loading);
 
   return loading && dashboard === null ? (
     <Spinner />

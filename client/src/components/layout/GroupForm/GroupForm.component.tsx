@@ -44,8 +44,8 @@ const GroupForm = () => {
           <textarea
             name='description'
             placeholder='Write a group description'
-            cols='30'
-            rows='2'
+            cols={30}
+            rows={2}
             value={description}
             onChange={(e) => onChange(e)}
             required

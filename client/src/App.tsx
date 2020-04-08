@@ -20,7 +20,7 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      await store.dispatch(loadMember());
+      await store.dispatch<any>(loadMember());
       setLoading(false);
     })();
   }, []);

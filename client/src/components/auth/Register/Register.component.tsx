@@ -7,7 +7,9 @@ import { Button, Col, Row, Container, Card } from 'react-bootstrap';
 import HeroSection from '../../layout/HeroSection/HeroSection.component';
 
 const Register = () => {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: any) => state.auth.isAuthenticated
+  );
   const dispatch = useDispatch();
   const [memberData, setMemberData] = useState({
     username: '',

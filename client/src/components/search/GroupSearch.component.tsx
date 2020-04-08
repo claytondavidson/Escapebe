@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import RenderResults from '../search/RenderResults.component';
+import RenderResults from './RenderResults.component';
 import { useSelector } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const GroupSearch = () => {
-  const groups = useSelector((state) => state.group.groups);
+  const groups = useSelector((state: any) => state.group.groups);
   const [search, setSearch] = useState('');
   const [matches, setMatches] = useState([]);
 

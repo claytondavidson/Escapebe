@@ -7,7 +7,9 @@ import { Button, Row, Container, Card, Col } from 'react-bootstrap';
 import HeroSection from '../../layout/HeroSection/HeroSection.component';
 
 const Login = () => {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: any) => state.auth.isAuthenticated
+  );
   const dispatch = useDispatch();
   const [memberData, setMemberData] = useState({
     email: '',
@@ -36,8 +38,6 @@ const Login = () => {
             <HeroSection />
           </Col>
           <Container
-            xs='12'
-            md='6'
             className='col-xs-12 col-md-6 mt-5'
             style={{ color: 'black' }}
           >
