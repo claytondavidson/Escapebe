@@ -32,14 +32,12 @@ export class GroupsController {
     }
 
     try {
-      const member = await Member.findById((<any>req).member.id).select(
-        '-password'
-      );
+      const member = await Member.findById(req.member.id).select('-password');
 
       const newGroup = new Group({
         title: req.body.title,
         description: req.body.description,
-        member: (<any>req).member.id,
+        member: req.member.id,
         username: member!.username,
       });
 
@@ -104,15 +102,13 @@ export class GroupsController {
     }
 
     try {
-      const member = await Member.findById((<any>req).member.id).select(
-        '-password'
-      );
+      const member = await Member.findById(req.member.id).select('-password');
       const group = await Group.findById(req.params.id);
 
       const newPost = {
         title: req.body.title,
         text: req.body.text,
-        member: (<any>req).member.id,
+        member: req.member.id,
         username: member!.username,
       };
 
@@ -137,9 +133,7 @@ export class GroupsController {
     }
 
     try {
-      const member = await Member.findById((<any>req).member.id).select(
-        '-password'
-      );
+      const member = await Member.findById(req.member.id).select('-password');
       const group = await Group.findById(req.params.group_id);
 
       const post = group!.posts.find((post) => post.id === req.params.post_id);
@@ -150,7 +144,7 @@ export class GroupsController {
 
       const newComment = {
         text: req.body.text,
-        member: (<any>req).member.id,
+        member: req.member.id,
         username: member!.username,
       };
 
@@ -178,14 +172,14 @@ export class GroupsController {
 
       const checkUpvote = post.upvotes.find(
         (upvote: { member: { toString: () => any } }) =>
-          upvote.member.toString() === (<any>req).member.id
+          upvote.member.toString() === req.member.id
       );
 
       if (checkUpvote) {
         return res.status(400).json({ msg: 'post already upvoted' });
       }
 
-      post.upvotes.unshift({ member: (<any>req).member.id });
+      post.upvotes.unshift({ member: req.member.id });
 
       await group!.save();
 
@@ -209,7 +203,7 @@ export class GroupsController {
 
       const unUpvote = post.upvotes.find(
         (upvote: { member: { toString: () => any } }) =>
-          upvote.member.toString() === (<any>req).member.id
+          upvote.member.toString() === req.member.id
       );
       if (!unUpvote) {
         return res.status(400).json({ msg: 'Post has not yet been upvoted' });

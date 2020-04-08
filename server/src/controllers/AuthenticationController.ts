@@ -13,9 +13,7 @@ export class AuthenticationController {
   @use(auth)
   protected async getMember(req: Request, res: Response) {
     try {
-      const member = await Member.findById((<any>req).member.id).select(
-        '-password'
-      );
+      const member = await Member.findById(req.member.id).select('-password');
       res.json(member);
     } catch (error) {
       console.error(error.message);
