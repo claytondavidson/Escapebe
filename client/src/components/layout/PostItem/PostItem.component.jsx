@@ -1,16 +1,16 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+//import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
-import { upvotePost } from '../../../redux/actions/group';
+//import { upvotePost } from '../../../redux/actions/group';
 
 const PostItem = ({
   groupId,
   post: { _id, username, member, title, text, upvotes, comments, date },
   showComments,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   return (
     <Fragment>
       <div className='group'>
