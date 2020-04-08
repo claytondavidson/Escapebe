@@ -7,7 +7,7 @@ import DashboardBehaviors from '../DashboardBehaviors/DashboardBehaviors.compone
 import { Nav } from 'react-bootstrap';
 import { getGroups } from '../../../redux/actions/group';
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGroups());

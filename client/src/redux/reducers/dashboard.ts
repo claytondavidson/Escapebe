@@ -1,9 +1,6 @@
-import {
-  GET_DASHBOARD,
-  DASHBOARD_ERROR,
-  CLEAR_MEMBER,
-  GET_DASHBOARDS,
-} from '../actions/types';
+import { Types } from '../actions';
+
+const { GET_DASHBOARD, DASHBOARD_ERROR, GET_DASHBOARDS, CLEAR_MEMBER } = Types;
 
 const initialState = {
   dashboard: null,

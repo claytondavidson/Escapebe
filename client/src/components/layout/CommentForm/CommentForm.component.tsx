@@ -2,15 +2,24 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addComment } from '../../../redux/actions/group';
 
-const CommentForm = ({ groupId, postId }) => {
-  const [commentData, setCommentData] = useState({
+interface CommentData {
+  text: string;
+}
+
+interface CommentFormProps {
+  groupId: string;
+  postId: string;
+}
+
+const CommentForm: React.FC<CommentFormProps> = ({ groupId, postId }) => {
+  const [commentData, setCommentData] = useState<CommentData>({
     text: '',
   });
   const dispatch = useDispatch();
 
   const { text } = commentData;
 
-  const onChange = (e) =>
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setCommentData({ ...commentData, [e.target.name]: e.target.value });
 
   return (

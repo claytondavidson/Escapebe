@@ -6,22 +6,27 @@ import { Form } from 'react-bootstrap';
 import { Button, Row, Container, Card, Col } from 'react-bootstrap';
 import HeroSection from '../../layout/HeroSection/HeroSection.component';
 
-const Login = () => {
+interface MemberData {
+  email: string;
+  password: string;
+}
+
+export const Login: React.FC = () => {
   const isAuthenticated = useSelector(
     (state: any) => state.auth.isAuthenticated
   );
   const dispatch = useDispatch();
-  const [memberData, setMemberData] = useState({
+  const [memberData, setMemberData] = useState<MemberData>({
     email: '',
     password: '',
   });
 
   const { email, password } = memberData;
 
-  const onChange = (e) =>
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setMemberData({ ...memberData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(login({ email, password }));
   };
@@ -45,7 +50,11 @@ const Login = () => {
               <Container>
                 <Row>
                   <div className='mx-auto'>
-                    <Form onSubmit={(e) => onSubmit(e)}>
+                    <Form
+                      onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                        onSubmit(e)
+                      }
+                    >
                       <Form.Group controlId='formBasicEmail'>
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
@@ -54,7 +63,9 @@ const Login = () => {
                           name='email'
                           required
                           value={email}
-                          onChange={(e) => onChange(e)}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLTextAreaElement>
+                          ) => onChange(e)}
                         />
                         <Form.Text className='text-muted'>
                           We'll never share your email with anyone else.
@@ -67,7 +78,9 @@ const Login = () => {
                           placeholder='Enter Password'
                           name='password'
                           value={password}
-                          onChange={(e) => onChange(e)}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLTextAreaElement>
+                          ) => onChange(e)}
                           required
                         />
                       </Form.Group>

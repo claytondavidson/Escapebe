@@ -9,7 +9,7 @@ import { get, use, controller, post, del } from './decorators';
 export class DashboardController {
   @get('/member')
   @use(auth)
-  protected async getAuthenticatedDashboard(req: Request, res: Response) {
+  protected async getCurrentDashboard(req: Request, res: Response) {
     try {
       const dashboard = await Dashboard.findOne({
         member: (<any>req).member.id,
@@ -40,8 +40,8 @@ export class DashboardController {
 
     const dashboardFields: any = {};
     dashboardFields.member = (<any>req).member.id;
-    alias ? dashboardFields.alias = alias : dashboardFields.alias = null;
-    about ? dashboardFields.about = about : dashboardFields.about = null;
+    alias ? (dashboardFields.alias = alias) : (dashboardFields.alias = null);
+    about ? (dashboardFields.about = about) : (dashboardFields.about = null);
 
     try {
       let dashboard = await Dashboard.findOne({ member: (<any>req).member.id });

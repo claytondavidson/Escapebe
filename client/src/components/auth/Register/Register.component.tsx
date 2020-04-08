@@ -6,12 +6,19 @@ import { Form } from 'react-bootstrap';
 import { Button, Col, Row, Container, Card } from 'react-bootstrap';
 import HeroSection from '../../layout/HeroSection/HeroSection.component';
 
-const Register = () => {
+interface MemberData {
+  username: string;
+  email: string;
+  password: string;
+  repeat: string;
+}
+
+const Register: React.FC = () => {
   const isAuthenticated = useSelector(
     (state: any) => state.auth.isAuthenticated
   );
   const dispatch = useDispatch();
-  const [memberData, setMemberData] = useState({
+  const [memberData, setMemberData] = useState<MemberData>({
     username: '',
     email: '',
     password: '',
@@ -20,10 +27,10 @@ const Register = () => {
 
   const { username, email, password, repeat } = memberData;
 
-  const onChange = (e) =>
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setMemberData({ ...memberData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== repeat) {
       console.log('passwords do not match');
@@ -50,7 +57,11 @@ const Register = () => {
                   <Row>
                     <h1>Register</h1>
                     <p>Please fill in this form to create an account.</p>
-                    <Form onSubmit={(e) => onSubmit(e)}>
+                    <Form
+                      onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                        onSubmit(e)
+                      }
+                    >
                       <Form.Group>
                         <Form.Label>Username</Form.Label>
                         <Form.Control
@@ -59,7 +70,9 @@ const Register = () => {
                           name='username'
                           required
                           value={username}
-                          onChange={(e) => onChange(e)}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLTextAreaElement>
+                          ) => onChange(e)}
                         />
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
@@ -68,7 +81,9 @@ const Register = () => {
                           name='email'
                           required
                           value={email}
-                          onChange={(e) => onChange(e)}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLTextAreaElement>
+                          ) => onChange(e)}
                         />
                       </Form.Group>
                       <Form.Group controlId='formPassword'>
@@ -78,7 +93,9 @@ const Register = () => {
                           placeholder='Enter Password'
                           name='password'
                           value={password}
-                          onChange={(e) => onChange(e)}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLTextAreaElement>
+                          ) => onChange(e)}
                           required
                         />
                       </Form.Group>
@@ -89,7 +106,9 @@ const Register = () => {
                           placeholder='Repeat Password'
                           name='repeat'
                           value={repeat}
-                          onChange={(e) => onChange(e)}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLTextAreaElement>
+                          ) => onChange(e)}
                           required
                         />
                       </Form.Group>

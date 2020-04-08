@@ -1,5 +1,8 @@
 import axios from 'axios';
-import {
+import { Types } from './types';
+import setToken from '../../utilities/setToken';
+
+const {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   MEMBER_LOADED,
@@ -8,8 +11,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_MEMBER,
-} from './types';
-import setToken from '../../utilities/setToken';
+} = Types;
 
 export const loadMember = () => async (dispatch) => {
   if (localStorage.token) {

@@ -1,8 +1,16 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const CommentItem = ({ comment: { text, username } }) => (
+interface CommentItemProps {
+  comment: {
+    text: string;
+    username: string;
+  };
+}
+
+export const CommentItem: React.FC<CommentItemProps> = ({
+  comment: { text, username },
+}) => (
   <Fragment>
     <div>
       <Link to={`/dashboard/${username}`}>
@@ -14,9 +22,5 @@ const CommentItem = ({ comment: { text, username } }) => (
     </div>
   </Fragment>
 );
-
-CommentItem.propTypes = {
-  comment: PropTypes.object.isRequired,
-};
 
 export default CommentItem;

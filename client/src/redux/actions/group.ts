@@ -1,18 +1,23 @@
 import axios from 'axios';
 
-import {
+import { Types } from './types';
+import { Dispatch } from 'redux';
+
+const {
   GET_GROUPS,
-  GROUP_ERROR,
-  CREATE_GROUP,
   GET_GROUP,
+  CREATE_GROUP,
+  GROUP_ERROR,
+  CLEAR_GROUP,
   ADD_POST,
   POST_ERROR,
   GET_POST,
+  CLEAR_POST,
   ADD_COMMENT,
   UPVOTE_POST,
-} from './types';
+} = Types;
 
-export const getGroups = () => async (dispatch) => {
+export const getGroups = () => async (dispatch: Dispatch) => {
   try {
     const res = await axios.get('/api/groups');
 
@@ -31,7 +36,7 @@ export const getGroups = () => async (dispatch) => {
   }
 };
 
-export const createGroup = (formData) => async (dispatch) => {
+export const createGroup = (formData) => async (dispatch: Dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -55,7 +60,8 @@ export const createGroup = (formData) => async (dispatch) => {
   }
 };
 
-export const getGroup = (id) => async (dispatch) => {
+export const getGroup = (id) => async (dispatch: Dispatch) => {
+  dispatch({ type: CLEAR_GROUP });
   try {
     const res = await axios.get(`/api/groups/${id}`);
 
@@ -74,7 +80,8 @@ export const getGroup = (id) => async (dispatch) => {
   }
 };
 
-export const getPost = (group_id, post_id) => async (dispatch) => {
+export const getPost = (group_id, post_id) => async (dispatch: Dispatch) => {
+  dispatch({ type: CLEAR_POST });
   try {
     const res = await axios.get(`/api/groups/${group_id}/${post_id}`);
 
@@ -93,7 +100,7 @@ export const getPost = (group_id, post_id) => async (dispatch) => {
   }
 };
 
-export const addPost = (groupId, formData) => async (dispatch) => {
+export const addPost = (groupId, formData) => async (dispatch: Dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -121,7 +128,9 @@ export const addPost = (groupId, formData) => async (dispatch) => {
   }
 };
 
-export const addComment = (groupId, postId, formData) => async (dispatch) => {
+export const addComment = (groupId, postId, formData) => async (
+  dispatch: Dispatch
+) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -149,7 +158,7 @@ export const addComment = (groupId, postId, formData) => async (dispatch) => {
   }
 };
 
-export const upvotePost = (groupId, id) => async (dispatch) => {
+export const upvotePost = (groupId, id) => async (dispatch: Dispatch) => {
   try {
     const res = await axios.put(`/api/groups/upvote/${groupId}/${id}`);
 

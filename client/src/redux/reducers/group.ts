@@ -1,14 +1,18 @@
-import {
+import { Types } from '../actions/types';
+
+const {
   GET_GROUPS,
-  GROUP_ERROR,
-  CREATE_GROUP,
   GET_GROUP,
+  CREATE_GROUP,
+  GROUP_ERROR,
+  CLEAR_GROUP,
   ADD_POST,
+  POST_ERROR,
   GET_POST,
+  CLEAR_POST,
   ADD_COMMENT,
   UPVOTE_POST,
-  POST_ERROR,
-} from '../actions/types';
+} = Types;
 
 const initialState = {
   groups: [],
@@ -47,6 +51,12 @@ export default function (state = initialState, action) {
         error: payload,
         loading: false,
       };
+    case CLEAR_GROUP:
+      return {
+        ...state,
+        group: null,
+        loading: false,
+      };
     case ADD_POST:
       return {
         ...state,
@@ -63,6 +73,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         post: payload,
+        loading: false,
+      };
+    case CLEAR_POST:
+      return {
+        ...state,
+        post: null,
         loading: false,
       };
     case ADD_COMMENT:

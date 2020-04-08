@@ -7,6 +7,18 @@ import { get, use, controller, post, put } from './decorators';
 
 @controller('/api/groups')
 export class GroupsController {
+  @get('/')
+  @use(auth)
+  protected async getAllGroups(req: Request, res: Response) {
+    try {
+      const groups = await Group.find().sort({ date: -1 });
+      res.json(groups);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('server error');
+    }
+  }
+
   @post('/')
   @use(auth)
   @use(check('title', 'you must include a title').not().isEmpty())
@@ -33,18 +45,6 @@ export class GroupsController {
 
       const group = await newGroup.save();
       res.json(group);
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).send('server error');
-    }
-  }
-
-  @get('/')
-  @use(auth)
-  protected async getAllGroups(req: Request, res: Response) {
-    try {
-      const groups = await Group.find().sort({ date: -1 });
-      res.json(groups);
     } catch (error) {
       console.error(error.message);
       res.status(500).send('server error');

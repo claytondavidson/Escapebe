@@ -1,21 +1,23 @@
-import {
+import { Types } from '../actions/types';
+
+const {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   MEMBER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
-} from '../actions/types';
+  LOGOUT,
+} = Types;
 
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
   isLoading: true,
-  member: null
+  member: null,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case REGISTER_SUCCESS:
@@ -25,14 +27,14 @@ export default function(state = initialState, action) {
         ...state,
         ...payload,
         isAuthenticated: true,
-        isLoading: false
+        isLoading: false,
       };
     case MEMBER_LOADED:
       return {
         ...state,
         isAuthenticated: true,
         isLoading: false,
-        member: payload
+        member: payload,
       };
     case AUTH_ERROR:
     case LOGIN_FAIL:
@@ -43,7 +45,7 @@ export default function(state = initialState, action) {
         ...state,
         token: null,
         isAuthenticated: false,
-        isLoading: false
+        isLoading: false,
       };
     default:
       return state;

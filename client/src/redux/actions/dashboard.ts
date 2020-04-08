@@ -1,13 +1,18 @@
 import axios from 'axios';
+import { Types } from './types';
+import { Dispatch } from 'redux';
 
-import {
-  GET_DASHBOARD,
-  DASHBOARD_ERROR,
-  GET_DASHBOARDS,
-  CLEAR_MEMBER,
-} from './types';
+const { GET_DASHBOARD, DASHBOARD_ERROR, GET_DASHBOARDS, CLEAR_MEMBER } = Types;
 
-export const getCurrentDashboard = () => async (dispatch) => {
+export interface CurrentDashboardAction {
+  type: Types.GET_DASHBOARD | Types.DASHBOARD_ERROR;
+}
+
+export interface RetrieveDashboardsAction {
+  type: Types.CLEAR_MEMBER | Types.GET_DASHBOARDS | Types.DASHBOARD_ERROR;
+}
+
+export const getCurrentDashboard = () => async (dispatch: Dispatch) => {
   try {
     const res = await axios.get('/api/dashboard/member');
 
@@ -23,7 +28,7 @@ export const getCurrentDashboard = () => async (dispatch) => {
   }
 };
 
-export const getDashboards = () => async (dispatch) => {
+export const getDashboards = () => async (dispatch: Dispatch) => {
   dispatch({ type: CLEAR_MEMBER });
 
   try {
@@ -44,7 +49,7 @@ export const getDashboards = () => async (dispatch) => {
   }
 };
 
-export const getDashboardById = (memberId) => async (dispatch) => {
+export const getDashboardById = (memberId) => async (dispatch: Dispatch) => {
   dispatch({ type: CLEAR_MEMBER });
 
   try {
@@ -65,7 +70,9 @@ export const getDashboardById = (memberId) => async (dispatch) => {
   }
 };
 
-export const createDashboard = (dashboardData, history) => async (dispatch) => {
+export const createDashboard = (dashboardData, history) => async (
+  dispatch: Dispatch
+) => {
   try {
     const config = {
       headers: {

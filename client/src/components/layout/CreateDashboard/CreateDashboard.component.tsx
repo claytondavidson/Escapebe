@@ -2,21 +2,29 @@ import React, { Fragment, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createDashboard } from '../../../redux/actions/dashboard';
 
-const CreateDashboard = ({ history }) => {
-  const [dashboardData, setDashboardData] = useState({
+interface CreateDashboardProps {
+  history: History;
+}
+
+interface DashboardData {
+  about: string;
+}
+
+const CreateDashboard: React.FC<CreateDashboardProps> = (history) => {
+  const [dashboardData, setDashboardData] = useState<DashboardData>({
     about: '',
   });
   const dispatch = useDispatch();
 
   const { about } = dashboardData;
 
-  const onChange = (e) =>
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setDashboardData({
       ...dashboardData,
       [e.target.name]: e.target.value,
     });
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(createDashboard(dashboardData, history));
   };
