@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addPost } from '../../../redux/actions/group';
 
-const PostForm = ({ groupId, addPost }) => {
+const PostForm = ({ groupId }) => {
+  const dispatch = useDispatch();
   const [postData, setPostData] = useState({
     title: '',
-    text: ''
+    text: '',
   });
 
   const { title, text } = postData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setPostData({ ...postData, [e.target.name]: e.target.value });
 
   return (
@@ -19,15 +19,17 @@ const PostForm = ({ groupId, addPost }) => {
       <h3>Add a post</h3>
       <form
         className='postform'
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
-          addPost(groupId, {
-            title,
-            text
-          });
+          dispatch(
+            addPost(groupId, {
+              title,
+              text,
+            })
+          );
           setPostData({
             title: '',
-            text: ''
+            text: '',
           });
         }}
       >
@@ -35,7 +37,7 @@ const PostForm = ({ groupId, addPost }) => {
           name='title'
           placeholder='Post title'
           value={title}
-          onChange={e => onChange(e)}
+          onChange={(e) => onChange(e)}
           required
         ></textarea>
         <textarea
@@ -44,7 +46,7 @@ const PostForm = ({ groupId, addPost }) => {
           cols='30'
           rows='2'
           value={text}
-          onChange={e => onChange(e)}
+          onChange={(e) => onChange(e)}
           required
         ></textarea>
 
@@ -56,8 +58,4 @@ const PostForm = ({ groupId, addPost }) => {
   );
 };
 
-PostForm.propTypes = {
-  addPost: PropTypes.func.isRequired
-};
-
-export default connect(null, { addPost })(PostForm);
+export default PostForm;

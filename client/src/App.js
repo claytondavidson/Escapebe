@@ -2,16 +2,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navigationbar from './components/layout/Navbar/Navigationbar.component';
 import Landing from './components/layout/Landing/Landing.component';
-import Register from './components/auth/Register/Register.component';
-import Login from './components/auth/Login/Login.component';
-import ProtectedRoute from './components/routing/ProtectedRoute.component';
-import Dashboard from './components/layout/Dashboard/Dashboard.component';
-import Groups from './components/layout/Groups/Groups.component';
-import Group from './components/layout/Group/Group.component';
-import Post from './components/layout/Post/Post.component';
-import CreateDashboard from './components/layout/CreateDashboard/CreateDashboard.component';
-import EditDashboard from './components/layout/EditDashboard/EditDashboard.component';
 import { Provider } from 'react-redux';
+import Routes from './components/routing/Routes.component';
 import store from './redux/store';
 import { loadMember } from './redux/actions/auth';
 import setToken from './utilities/setToken';
@@ -42,28 +34,9 @@ const App = () => {
       <Router>
         <Fragment>
           <Navigationbar />
-          <Route exact path='/' component={Landing} />
           <Switch>
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/login' component={Login} />
-            <ProtectedRoute exact path='/dashboard' component={Dashboard} />
-            <ProtectedRoute
-              exact
-              path='/create-dashboard'
-              component={CreateDashboard}
-            />
-            <ProtectedRoute
-              exact
-              path='/edit-dashboard'
-              component={EditDashboard}
-            />
-            <ProtectedRoute exact path='/groups' component={Groups} />
-            <ProtectedRoute exact path='/group/:id' component={Group} />
-            <ProtectedRoute
-              exact
-              path='/group/:group_id/:post_id'
-              component={Post}
-            />
+            <Route exact path='/' component={Landing} />
+            <Route component={Routes} />
           </Switch>
           <ScrollUpButton style={{ background: '#dbdae8' }} />
         </Fragment>

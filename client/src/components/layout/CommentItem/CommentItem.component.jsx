@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const CommentItem = ({ comment: { _id, text, username, date } }) => (
+const CommentItem = ({ comment: { text, username } }) => (
   <Fragment>
     <div>
       <Link to={`/dashboard/${username}`}>
@@ -17,9 +16,7 @@ const CommentItem = ({ comment: { _id, text, username, date } }) => (
 );
 
 CommentItem.propTypes = {
-  comment: PropTypes.object.isRequired
+  comment: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({});
-
-export default connect(mapStateToProps, {})(CommentItem);
+export default CommentItem;

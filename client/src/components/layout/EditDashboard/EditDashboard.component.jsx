@@ -1,51 +1,47 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   createDashboard,
-  getCurrentDashboard
+  getCurrentDashboard,
 } from '../../../redux/actions/dashboard';
 
-const EditDashboard = ({
-  dashboard: { dashboard, loading },
-  createDashboard,
-  getCurrentDashboard,
-  history
-}) => {
+const EditDashboard = ({ history }) => {
+  const dashboard = useSelector((state) => state.dashboard.dashboard);
+  const loading = useSelector((state) => state.dashboard.loading);
+  const dispatch = useDispatch();
   const [dashboardData, setDashboardData] = useState({
-    about: ''
+    about: '',
   });
 
   const { about } = dashboardData;
 
   useEffect(() => {
-    getCurrentDashboard();
+    dispatch(getCurrentDashboard());
     setDashboardData({
-      about: !dashboard.about || loading ? '' : dashboard.about
+      about: !dashboard.about || loading ? '' : dashboard.about,
     });
-  }, [loading, dashboard.about, getCurrentDashboard]);
+  }, [loading, dashboard.about, dispatch]);
 
-  const onChange = e =>
+  const onChange = (e) =>
     setDashboardData({
       ...dashboardData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    createDashboard(dashboardData, history);
+    dispatch(createDashboard(dashboardData, history));
   };
 
   return (
     <Fragment>
-      <form onSubmit={e => onSubmit(e)}>
+      <form onSubmit={(e) => onSubmit(e)}>
         <div>
           <textarea
             placeholder='about'
             name='about'
             value={about}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
             required
           ></textarea>
         </div>
@@ -55,17 +51,4 @@ const EditDashboard = ({
   );
 };
 
-EditDashboard.propTypes = {
-  createDashboard: PropTypes.func.isRequired,
-  dashboard: PropTypes.object.isRequired,
-  getCurrentDashboard: PropTypes.func.isRequired
-};
-
-const mapStateToProps = state => ({
-  dashboard: state.dashboard
-});
-
-export default connect(mapStateToProps, {
-  createDashboard,
-  getCurrentDashboard
-})(withRouter(EditDashboard));
+export default EditDashboard;

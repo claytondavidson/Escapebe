@@ -9,83 +9,95 @@ import {
   POST_ERROR,
   GET_POST,
   ADD_COMMENT,
-  UPVOTE_POST
+  UPVOTE_POST,
 } from './types';
 
-export const getGroups = () => async dispatch => {
+export const getGroups = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/groups');
 
     dispatch({
       type: GET_GROUPS,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
       type: GROUP_ERROR,
-      payload: { msg: error.response.statusText, status: error.response.status }
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
     });
   }
 };
 
-export const createGroup = formData => async dispatch => {
+export const createGroup = (formData) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   };
   try {
     const res = await axios.post('/api/groups', formData, config);
 
     dispatch({
       type: CREATE_GROUP,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
       type: GROUP_ERROR,
-      payload: { msg: error.response.statusText, status: error.response.status }
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
     });
   }
 };
 
-export const getGroup = id => async dispatch => {
+export const getGroup = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/groups/${id}`);
 
     dispatch({
       type: GET_GROUP,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
       type: GROUP_ERROR,
-      payload: { msg: error.response.statusText, status: error.response.status }
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
     });
   }
 };
 
-export const getPost = (group_id, post_id) => async dispatch => {
+export const getPost = (group_id, post_id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/groups/${group_id}/${post_id}`);
 
     dispatch({
       type: GET_POST,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: error.response.statusText, status: error.response.status }
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
     });
   }
 };
 
-export const addPost = (groupId, formData) => async dispatch => {
+export const addPost = (groupId, formData) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   };
   try {
     const res = await axios.post(
@@ -96,21 +108,24 @@ export const addPost = (groupId, formData) => async dispatch => {
 
     dispatch({
       type: ADD_POST,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: error.response.statusText, status: error.response.status }
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
     });
   }
 };
 
-export const addComment = (groupId, postId, formData) => async dispatch => {
+export const addComment = (groupId, postId, formData) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   };
   try {
     const res = await axios.post(
@@ -121,28 +136,34 @@ export const addComment = (groupId, postId, formData) => async dispatch => {
 
     dispatch({
       type: ADD_COMMENT,
-      payload: res.data
+      payload: res.data,
     });
   } catch (error) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: error.response.statusText, status: error.response.status }
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
     });
   }
 };
 
-export const upvotePost = (groupId, postId) => async dispatch => {
+export const upvotePost = (groupId, id) => async (dispatch) => {
   try {
-    const res = await axios.put(`/api/groups/upvote/${groupId}/${postId}`);
+    const res = await axios.put(`/api/groups/upvote/${groupId}/${id}`);
 
     dispatch({
       type: UPVOTE_POST,
-      payload: { groupId, postId, upvotes: res.data }
+      payload: { id, upvotes: res.data },
     });
   } catch (error) {
     dispatch({
       type: POST_ERROR,
-      payload: { msg: error.response.statusText, status: error.response.status }
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
     });
   }
 };

@@ -1,26 +1,27 @@
 import React, { useState, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../../redux/actions/auth';
 import { Form } from 'react-bootstrap';
 import { Button, Row, Container, Card, Col } from 'react-bootstrap';
 import HeroSection from '../../layout/HeroSection/HeroSection.component';
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
   const [memberData, setMemberData] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   const { email, password } = memberData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setMemberData({ ...memberData, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    login({ email, password });
+    dispatch(login({ email, password }));
   };
 
   if (isAuthenticated) {
@@ -44,7 +45,7 @@ const Login = ({ login, isAuthenticated }) => {
               <Container>
                 <Row>
                   <div className='mx-auto'>
-                    <Form onSubmit={e => onSubmit(e)}>
+                    <Form onSubmit={(e) => onSubmit(e)}>
                       <Form.Group controlId='formBasicEmail'>
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
@@ -53,7 +54,7 @@ const Login = ({ login, isAuthenticated }) => {
                           name='email'
                           required
                           value={email}
-                          onChange={e => onChange(e)}
+                          onChange={(e) => onChange(e)}
                         />
                         <Form.Text className='text-muted'>
                           We'll never share your email with anyone else.
@@ -66,7 +67,7 @@ const Login = ({ login, isAuthenticated }) => {
                           placeholder='Enter Password'
                           name='password'
                           value={password}
-                          onChange={e => onChange(e)}
+                          onChange={(e) => onChange(e)}
                           required
                         />
                       </Form.Group>
@@ -90,13 +91,4 @@ const Login = ({ login, isAuthenticated }) => {
   );
 };
 
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
-};
-
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default Login;

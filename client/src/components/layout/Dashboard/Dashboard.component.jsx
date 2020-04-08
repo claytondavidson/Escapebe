@@ -1,23 +1,21 @@
 import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentDashboard } from '../../../redux/actions/dashboard';
 import Spinner from '../Spinner/Spinner.component';
 import DashboardBehaviors from '../DashboardBehaviors/DashboardBehaviors.component';
 import { Nav } from 'react-bootstrap';
 import { getGroups } from '../../../redux/actions/group';
 
-const Dashboard = ({
-  getCurrentDashboard,
-  auth: { member },
-  dashboard: { dashboard, loading },
-  getGroups
-}) => {
+const Dashboard = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    getGroups();
-    getCurrentDashboard();
-  }, [getCurrentDashboard, getGroups]);
+    dispatch(getGroups());
+    dispatch(getCurrentDashboard());
+  }, [dispatch]);
+  const member = useSelector((state) => state.auth.member);
+  const dashboard = useSelector((state) => state.dashboard.dashboard);
+  const loading = useSelector((state) => state.dashboard.loading);
 
   return loading && dashboard === null ? (
     <Spinner />
@@ -49,19 +47,4 @@ const Dashboard = ({
   );
 };
 
-Dashboard.propTypes = {
-  getCurrentDashboard: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  dashboard: PropTypes.object.isRequired,
-  getGroups: PropTypes.func.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth,
-  dashboard: state.dashboard,
-  group: state.group
-});
-
-export default connect(mapStateToProps, { getCurrentDashboard, getGroups })(
-  Dashboard
-);
+export default Dashboard;

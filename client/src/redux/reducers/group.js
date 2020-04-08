@@ -6,7 +6,8 @@ import {
   ADD_POST,
   GET_POST,
   ADD_COMMENT,
-  UPVOTE_POST
+  UPVOTE_POST,
+  POST_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -15,10 +16,10 @@ const initialState = {
   loading: true,
   error: {},
   post: null,
-  comments: null
+  comments: null,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -26,51 +27,57 @@ export default function(state = initialState, action) {
       return {
         ...state,
         groups: payload,
-        loading: false
+        loading: false,
       };
     case GET_GROUP:
       return {
         ...state,
         group: payload,
-        loading: false
+        loading: false,
       };
     case CREATE_GROUP:
       return {
         ...state,
         groups: [...state.groups, payload],
-        loading: false
+        loading: false,
       };
     case GROUP_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false
+        loading: false,
       };
     case ADD_POST:
       return {
         ...state,
         group: { ...state.group, posts: payload },
-        loading: false
+        loading: false,
+      };
+    case POST_ERROR:
+      return {
+        ...state,
+        error: payload,
+        loading: false,
       };
     case GET_POST:
       return {
         ...state,
         post: payload,
-        loading: false
+        loading: false,
       };
     case ADD_COMMENT:
       return {
         ...state,
         post: { ...state.post, comments: payload },
-        loading: false
+        loading: false,
       };
     case UPVOTE_POST:
       return {
         ...state,
-        posts: state.posts.map(post =>
+        posts: state.group.posts.map((post) =>
           post._id === payload.id ? { ...post, upvotes: payload.upvotes } : post
         ),
-        loading: false
+        loading: false,
       };
     default:
       return state;

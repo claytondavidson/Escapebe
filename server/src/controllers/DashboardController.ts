@@ -40,8 +40,8 @@ export class DashboardController {
 
     const dashboardFields: any = {};
     dashboardFields.member = (<any>req).member.id;
-    if (alias) dashboardFields.alias = alias;
-    if (about) dashboardFields.about = about;
+    alias ? dashboardFields.alias = alias : dashboardFields.alias = null;
+    about ? dashboardFields.about = about : dashboardFields.about = null;
 
     try {
       let dashboard = await Dashboard.findOne({ member: (<any>req).member.id });

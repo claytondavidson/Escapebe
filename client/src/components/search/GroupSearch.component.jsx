@@ -1,22 +1,21 @@
 import React, { Fragment, useState } from 'react';
 import RenderResults from '../search/RenderResults.component';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { getGroups } from '../../redux/actions/group';
+import { useSelector } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const GroupSearch = ({ group: { groups } }) => {
+const GroupSearch = () => {
+  const groups = useSelector((state) => state.group.groups);
   const [search, setSearch] = useState('');
   const [matches, setMatches] = useState([]);
 
-  const searchGroups = text => {
+  const searchGroups = (text) => {
     const regex = new RegExp(`^${text}`, 'gi');
-    let matches = groups.filter(group => group.title.match(regex));
+    let matches = groups.filter((group) => group.title.match(regex));
     text.length === 0 ? setMatches([]) : setMatches(matches);
   };
 
-  const handleSearchChange = e => {
+  const handleSearchChange = (e) => {
     setSearch(e.target.value);
     searchGroups(e.target.value);
   };
@@ -29,7 +28,7 @@ const GroupSearch = ({ group: { groups } }) => {
         onChange={handleSearchChange}
       />
       <div className='groups'>
-        {matches.map(match => (
+        {matches.map((match) => (
           <Dropdown.Item
             id='dropdownId'
             key={match._id}
@@ -45,13 +44,4 @@ const GroupSearch = ({ group: { groups } }) => {
   );
 };
 
-GroupSearch.propTypes = {
-  getGroups: PropTypes.func.isRequired,
-  group: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  group: state.group
-});
-
-export default connect(mapStateToProps, { getGroups })(GroupSearch);
+export default GroupSearch;

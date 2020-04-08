@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { createGroup } from '../../../redux/actions/group';
 import { Button } from 'react-bootstrap';
-const GroupForm = ({ createGroup }) => {
+const GroupForm = () => {
+  const dispatch = useDispatch();
   const [groupData, setGroupData] = useState({
     title: '',
-    description: ''
+    description: '',
   });
 
   const { title, description } = groupData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setGroupData({ ...groupData, [e.target.name]: e.target.value });
 
   return (
@@ -20,15 +20,17 @@ const GroupForm = ({ createGroup }) => {
         <h3>Create a group</h3>
         <form
           className='groupform'
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
-            createGroup({
-              title,
-              description
-            });
+            dispatch(
+              createGroup({
+                title,
+                description,
+              })
+            );
             setGroupData({
               title: '',
-              description: ''
+              description: '',
             });
           }}
         >
@@ -36,7 +38,7 @@ const GroupForm = ({ createGroup }) => {
             name='title'
             placeholder='Name your group'
             value={title}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
             required
           ></textarea>
           <textarea
@@ -45,7 +47,7 @@ const GroupForm = ({ createGroup }) => {
             cols='30'
             rows='2'
             value={description}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
             required
           ></textarea>
 
@@ -58,8 +60,4 @@ const GroupForm = ({ createGroup }) => {
   );
 };
 
-GroupForm.propTypes = {
-  createGroup: PropTypes.func.isRequired
-};
-
-export default connect(null, { createGroup })(GroupForm);
+export default GroupForm;

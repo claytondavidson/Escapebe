@@ -1,18 +1,15 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../redux/actions/auth';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Button, Row } from 'react-bootstrap';
 import GroupSearch from '../../search/GroupSearch.component';
-//import Login from '../../auth/Login/Login.component';
-//var ReactFitText = require('react-fittext');
 
-export const Navigationbar = ({
-  auth: { isAuthenticated, loading },
-  logout
-}) => {
+export const Navigationbar = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const loading = useSelector((state) => state.auth.loading);
   const authLinks = (
     <div>
       <Nav>
@@ -26,7 +23,7 @@ export const Navigationbar = ({
           Groups
         </Nav.Link>
 
-        <Nav.Link onClick={logout} as={Link} to='/'>
+        <Nav.Link onClick={() => dispatch(logout())} as={Link} to='/'>
           <Button className='btn-success ml-xl-5' id='logoutButton'>
             <i className='fas fa-sign-out-alt'></i>
             Logout
@@ -101,13 +98,4 @@ export const Navigationbar = ({
   );
 };
 
-Navigationbar.propTypes = {
-  logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps, { logout })(Navigationbar);
+export default Navigationbar;

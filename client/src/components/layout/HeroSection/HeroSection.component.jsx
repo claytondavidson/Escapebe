@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-//import Login from '../../auth/Login/Login.component';
-//import Register from '../../auth/Register/Register.component';
 
 export const HeroSection = () => {
   return (

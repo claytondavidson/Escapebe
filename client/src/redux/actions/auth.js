@@ -7,11 +7,11 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_USER
+  CLEAR_MEMBER,
 } from './types';
 import setToken from '../../utilities/setToken';
 
-export const loadMember = () => async dispatch => {
+export const loadMember = () => async (dispatch) => {
   if (localStorage.token) {
     try {
       setToken(localStorage.token);
@@ -19,25 +19,25 @@ export const loadMember = () => async dispatch => {
 
       dispatch({
         type: MEMBER_LOADED,
-        payload: res.data
+        payload: res.data,
       });
     } catch (error) {
       dispatch({
-        type: AUTH_ERROR
+        type: AUTH_ERROR,
       });
     }
   } else {
     dispatch({
-      type: AUTH_ERROR
+      type: AUTH_ERROR,
     });
   }
 };
 
-export const register = ({ username, email, password }) => async dispatch => {
+export const register = ({ username, email, password }) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   };
 
   const body = { username, email, password };
@@ -47,7 +47,7 @@ export const register = ({ username, email, password }) => async dispatch => {
 
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
     dispatch(loadMember());
   } catch (error) {
@@ -57,11 +57,11 @@ export const register = ({ username, email, password }) => async dispatch => {
   }
 };
 
-export const login = ({ email, password }) => async dispatch => {
+export const login = ({ email, password }) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   };
 
   const body = JSON.stringify({ email, password });
@@ -71,7 +71,7 @@ export const login = ({ email, password }) => async dispatch => {
 
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
     dispatch(loadMember());
   } catch (error) {
@@ -80,7 +80,7 @@ export const login = ({ email, password }) => async dispatch => {
   }
 };
 
-export const logout = () => dispatch => {
-  dispatch({ type: CLEAR_USER });
+export const logout = () => (dispatch) => {
+  dispatch({ type: CLEAR_MEMBER });
   dispatch({ type: LOGOUT });
 };

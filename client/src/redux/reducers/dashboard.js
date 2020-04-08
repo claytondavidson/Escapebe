@@ -1,18 +1,18 @@
 import {
   GET_DASHBOARD,
   DASHBOARD_ERROR,
-  CLEAR_USER,
-  GET_DASHBOARDS
+  CLEAR_MEMBER,
+  GET_DASHBOARDS,
 } from '../actions/types';
 
 const initialState = {
   dashboard: null,
   dashboards: [],
   loading: true,
-  error: {}
+  error: {},
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -20,25 +20,25 @@ export default function(state = initialState, action) {
       return {
         ...state,
         dashboard: payload,
-        loading: false
+        loading: false,
       };
     case GET_DASHBOARDS:
       return {
         ...state,
         dashboards: payload,
-        loading: false
+        loading: false,
       };
     case DASHBOARD_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false
+        loading: false,
       };
-    case CLEAR_USER:
+    case CLEAR_MEMBER:
       return {
         ...state,
         dashboard: null,
-        loading: true
+        loading: true,
       };
     default:
       return state;

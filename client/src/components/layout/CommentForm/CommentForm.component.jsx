@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addComment } from '../../../redux/actions/group';
 
-const CommentForm = ({ groupId, postId, addComment }) => {
+const CommentForm = ({ groupId, postId }) => {
   const [commentData, setCommentData] = useState({
-    text: ''
+    text: '',
   });
+  const dispatch = useDispatch();
 
   const { text } = commentData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setCommentData({ ...commentData, [e.target.name]: e.target.value });
 
   return (
@@ -18,13 +18,15 @@ const CommentForm = ({ groupId, postId, addComment }) => {
       <h3>Add a comment</h3>
       <form
         className='commentform'
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
-          addComment(groupId, postId, {
-            text
-          });
+          dispatch(
+            addComment(groupId, postId, {
+              text,
+            })
+          );
           setCommentData({
-            text: ''
+            text: '',
           });
         }}
       >
@@ -34,7 +36,7 @@ const CommentForm = ({ groupId, postId, addComment }) => {
           cols='30'
           rows='2'
           value={text}
-          onChange={e => onChange(e)}
+          onChange={(e) => onChange(e)}
           required
         ></textarea>
 
@@ -46,8 +48,4 @@ const CommentForm = ({ groupId, postId, addComment }) => {
   );
 };
 
-CommentForm.propTypes = {
-  addComment: PropTypes.func.isRequired
-};
-
-export default connect(null, { addComment })(CommentForm);
+export default CommentForm;
