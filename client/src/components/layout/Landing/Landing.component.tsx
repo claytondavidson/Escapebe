@@ -1,7 +1,7 @@
 import React from 'react';
 import Register from '../../auth/Register/Register.component';
 
-export const Landing = () => {
+export const Landing: React.FC = () => {
   return (
     <div>
       <div className=''>

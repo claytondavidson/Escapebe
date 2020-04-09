@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Button, Row } from 'react-bootstrap';
 import GroupSearch from '../../search/GroupSearch.component';
 
-export const Navigationbar = () => {
+export const Navigationbar: React.FC = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: any) => state.auth.isAuthenticated

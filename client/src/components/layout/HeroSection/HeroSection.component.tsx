@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export const HeroSection = () => {
+export const HeroSection: React.FC = () => {
   return (
     <Fragment>
       <Container id='heroSectionContainer'>

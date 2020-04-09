@@ -2,16 +2,25 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPost } from '../../../redux/actions/group';
 
-const PostForm = ({ groupId }) => {
+interface PostData {
+  title: string;
+  text: string;
+}
+
+interface PostFormProps {
+  groupId: string;
+}
+
+const PostForm: React.FC<PostFormProps> = ({ groupId }) => {
   const dispatch = useDispatch();
-  const [postData, setPostData] = useState({
+  const [postData, setPostData] = useState<PostData>({
     title: '',
     text: '',
   });
 
   const { title, text } = postData;
 
-  const onChange = (e) =>
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setPostData({ ...postData, [e.target.name]: e.target.value });
 
   return (

@@ -6,7 +6,7 @@ import { getGroups } from '../../../redux/actions/group';
 import GroupForm from '../GroupForm/GroupForm.component';
 import LazyLoad from 'react-lazyload';
 
-const Groups = () => {
+const Groups: React.FC = () => {
   const groups = useSelector((state: any) => state.group.groups);
   const loading = useSelector((state: any) => state.group.loading);
   const dispatch = useDispatch();
