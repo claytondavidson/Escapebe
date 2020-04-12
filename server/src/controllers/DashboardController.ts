@@ -12,7 +12,7 @@ export class DashboardController {
   protected async getCurrentDashboard(req: Request, res: Response) {
     try {
       const dashboard = await Dashboard.findOne({
-        member: req.member.id,
+        member: (<any>req).member.id,
       }).populate('member', ['alias']);
 
       if (!dashboard) {
@@ -39,16 +39,16 @@ export class DashboardController {
     const { alias, about } = req.body;
 
     const dashboardFields: any = {};
-    dashboardFields.member = req.member.id;
+    dashboardFields.member = (<any>req).member.id;
     alias ? (dashboardFields.alias = alias) : (dashboardFields.alias = null);
     about ? (dashboardFields.about = about) : (dashboardFields.about = null);
 
     try {
-      let dashboard = await Dashboard.findOne({ member: req.member.id });
+      let dashboard = await Dashboard.findOne({ member: (<any>req).member.id });
 
       if (dashboard) {
         dashboard = await Dashboard.findOneAndUpdate(
-          { member: req.member.id },
+          { member: (<any>req).member.id },
           { $set: dashboardFields },
           { new: true }
         );
@@ -106,9 +106,9 @@ export class DashboardController {
   protected async deleteMember(req: Request, res: Response) {
     try {
       // @TODO remove member's posts on removal
-      await Dashboard.findOneAndRemove({ member: req.member.id });
+      await Dashboard.findOneAndRemove({ member: (<any>req).member.id });
 
-      await Member.findOneAndRemove({ _id: req.member.id });
+      await Member.findOneAndRemove({ _id: (<any>req).member.id });
 
       res.json({ msg: 'member removed' });
     } catch (error) {

@@ -23,14 +23,15 @@ const GroupSearch = () => {
   return (
     <Fragment>
       <input
-        placeholder='Search for groups'
+        className="mt-2"
+        placeholder="Search for groups"
         value={search}
         onChange={handleSearchChange}
       />
-      <div className='groups'>
+      <div className="groups">
         {matches.map((match) => (
           <Dropdown.Item
-            id='dropdownId'
+            id="dropdownId"
             key={match._id}
             as={Link}
             to={`/group/${match._id}`}
